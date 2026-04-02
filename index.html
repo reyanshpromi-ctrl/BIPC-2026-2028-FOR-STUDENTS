@@ -3,287 +3,327 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC TITAN | 2026-2028 MANUSCRIPT</title>
+    <title>BIPC TITAN | 2026-2028 CLINICAL WHITE</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --accent: #007AFF;
-            --gold: #D4AF37;
-            --bg: #050505;
-            --surface: #0f0f0f;
-            --border: rgba(255, 255, 255, 0.08);
+            --medical-blue: #007AFF;
+            --clinical-grey: #F5F5F7;
+            --border: #E5E5E5;
         }
 
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #fff; overflow-x: hidden; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #FFFFFF; 
+            color: #1D1D1F;
+            overflow-x: hidden;
+        }
 
-        /* PREMIUM BOOK STYLING */
-        .manuscript-container {
-            background: #080808;
+        .titan-title { font-family: 'Playfair Display', serif; }
+
+        /* PHASE NAVIGATION */
+        .phase-card {
             border: 1px solid var(--border);
-            border-radius: 2.5rem;
-            min-height: 850px;
-            padding: 5rem;
-            position: relative;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,1);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #FFF;
+        }
+        .phase-card:hover { transform: translateY(-10px); box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
+
+        .locked { filter: grayscale(1); opacity: 0.3; cursor: not-allowed; }
+
+        /* BOOK INTERFACE */
+        .book-manuscript {
+            max-width: 900px;
+            margin: 0 auto;
+            min-height: 1000px;
+            border: 1px solid var(--border);
+            padding: 80px;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.02);
+            background: #FFF;
         }
 
-        .formula-card {
-            background: rgba(212, 175, 55, 0.05);
-            border-left: 4px solid var(--gold);
-            padding: 2rem;
-            margin: 1.5rem 0;
-            font-family: 'JetBrains Mono', monospace;
+        .formula-box {
+            background: var(--clinical-grey);
+            padding: 30px;
+            border-radius: 12px;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 30px 0;
+            border-left: 5px solid var(--medical-blue);
         }
 
-        .revision-tip {
-            background: rgba(0, 122, 255, 0.05);
-            border-radius: 1.5rem;
-            padding: 1.5rem;
-            display: flex;
-            align-items: flex-start;
-            gap: 1.5rem;
-            border: 1px solid rgba(0,122,255,0.1);
+        .btn-medical {
+            background: #1D1D1F;
+            color: #FFF;
+            padding: 18px 45px;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: 0.3s;
         }
-
-        .btn-titan {
-            background: #fff; color: #000; padding: 1.2rem 3rem;
-            border-radius: 100px; font-weight: 800; text-transform: uppercase;
-            transition: 0.3s cubic-bezier(0.2, 1, 0.2, 1);
-        }
-        .btn-titan:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
-
-        .status-fail { border: 2px solid #ef4444 !important; background: rgba(239, 68, 68, 0.05) !important; }
-        .status-pass { border: 2px solid #22c55e !important; background: rgba(34, 197, 94, 0.05) !important; }
+        .btn-medical:hover { background: var(--medical-blue); transform: scale(1.02); }
 
         /* ANIMATIONS */
-        @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        .page-animate { animation: slideIn 0.5s ease forwards; }
+        .fade-in { animation: fadeIn 0.8s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #DDD; }
     </style>
 </head>
 <body>
 
-    <nav class="fixed top-0 left-0 w-full p-8 flex justify-between items-center z-[100] bg-black/50 backdrop-blur-md border-b border-white/5">
-        <div class="flex items-center gap-4">
-            <div class="w-10 h-10 bg-white text-black font-black flex items-center justify-center rounded-lg italic">T</div>
-            <h1 class="text-xl font-bold tracking-tighter">BIPC TITAN <span class="text-blue-500 opacity-50">2026-28</span></h1>
+    <section id="p-home" class="min-h-screen flex items-center justify-center p-10 text-center">
+        <div class="fade-in">
+            <h1 class="titan-title text-[8rem] md:text-[12rem] leading-none mb-6">BIPC Titan.</h1>
+            <p class="text-2xl font-light tracking-widest uppercase opacity-40 mb-16">Clinical Batch 2026 — 2028</p>
+            <button onclick="nav('reg')" class="btn-medical">INITIALIZE REGISTRATION</button>
         </div>
-        <div id="global-timer" class="hidden text-2xl font-black text-red-500 font-mono">05:00</div>
-        <button onclick="location.reload()" class="text-white/20 hover:text-white transition"><i class="fas fa-redo"></i></button>
-    </nav>
+    </section>
 
-    <main class="pt-32 p-10 max-w-[1400px] mx-auto min-h-screen">
-        
-        <section id="module-book" class="space-y-12">
-            <div class="flex justify-between items-end mb-10">
+    <section id="p-reg" class="hidden min-h-screen flex items-center justify-center p-10 bg-[#FBFBFB]">
+        <div class="w-full max-w-xl bg-white border border-[#EEE] p-16 rounded-3xl shadow-sm fade-in">
+            <h2 class="text-4xl font-extrabold mb-10 tracking-tighter">Candidate Registration</h2>
+            <div class="space-y-6">
                 <div>
-                    <h2 id="ch-title" class="text-6xl font-black italic tracking-tighter">Human Reproduction</h2>
-                    <p id="page-desc" class="text-xs font-black uppercase tracking-[0.8em] text-white/30 mt-4">Page 01: Core Concept Dissection</p>
+                    <label class="text-[10px] font-bold uppercase opacity-40">Full Legal Name</label>
+                    <input type="text" id="reg-name" placeholder="Reyansh Supreme" class="w-full p-4 border-b-2 border-gray-100 focus:border-blue-500 outline-none transition font-semibold">
                 </div>
-                <div class="flex gap-4">
-                    <button onclick="flip(-1)" class="w-14 h-14 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition"><i class="fas fa-chevron-left"></i></button>
-                    <button onclick="flip(1)" id="btn-next" class="w-14 h-14 border border-white/10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition"><i class="fas fa-chevron-right"></i></button>
+                <div>
+                    <label class="text-[10px] font-bold uppercase opacity-40">Portal Password</label>
+                    <input type="password" placeholder="••••••••" class="w-full p-4 border-b-2 border-gray-100 focus:border-blue-500 outline-none transition font-semibold">
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold uppercase opacity-40">Batch Commencement Date</label>
+                    <input type="date" value="2026-04-03" class="w-full p-4 border-b-2 border-gray-100 focus:border-blue-500 outline-none transition font-semibold">
+                </div>
+                <div class="flex items-start gap-4 py-4">
+                    <input type="checkbox" class="mt-1" checked>
+                    <p class="text-xs text-gray-400">I agree to the BIPC Titan Terms of Clinical Excellence, forced revision protocols, and the 2026-2028 syllabus synchronization.</p>
+                </div>
+                <button onclick="nav('timeline')" class="w-full btn-medical mt-4">AUTHENTICATE & ENTER</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="p-timeline" class="hidden min-h-screen p-20 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-6xl font-black mb-20 tracking-tighter">Academic <span class="text-blue-600 italic">Timeline.</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div onclick="nav('subjects')" class="phase-card cursor-pointer">
+                    <span class="text-blue-600 font-bold text-xs uppercase tracking-widest">Phase 01</span>
+                    <h3 class="text-5xl font-black mt-4 mb-6">2026</h3>
+                    <p class="text-gray-400 font-medium">Foundation Dissection & Class 11 Clinical Core Unlocked.</p>
+                </div>
+                <div class="phase-card locked">
+                    <span class="font-bold text-xs uppercase tracking-widest">Phase 02</span>
+                    <h3 class="text-5xl font-black mt-4 mb-6">2027</h3>
+                    <p class="text-gray-400 font-medium">Class 12 Advanced Medical Matrix (Locked until 2027).</p>
+                </div>
+                <div class="phase-card locked">
+                    <span class="font-bold text-xs uppercase tracking-widest">Phase 03</span>
+                    <h3 class="text-5xl font-black mt-4 mb-6">2028</h3>
+                    <p class="text-gray-400 font-medium">Final NEET Rank Optimization & Mock Drills.</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="manuscript-container" id="page-content">
+    <section id="p-subjects" class="hidden min-h-screen p-20">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-6xl font-black mb-20 tracking-tighter">Domain Selection.</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div onclick="loadSubject('BIO')" class="p-20 border border-gray-100 rounded-3xl hover:bg-green-50 transition cursor-pointer">
+                    <i class="fas fa-dna text-4xl text-green-500 mb-6"></i>
+                    <h4 class="text-2xl font-bold">BIOLOGY</h4>
                 </div>
-
-            <div id="completion-trigger" class="hidden text-center py-20">
-                <h3 class="text-4xl font-black italic mb-8">Chapter Dissection Complete</h3>
-                <button onclick="startMode('prof')" class="btn-titan">Initiate Proficiency Shield <i class="fas fa-bolt ml-2"></i></button>
-            </div>
-        </section>
-
-        <section id="module-prof" class="hidden py-20 text-center animate-fade">
-            <div class="max-w-2xl mx-auto border border-white/10 p-20 rounded-[3rem] bg-white/5">
-                <i class="fas fa-shield-halved text-7xl text-blue-500 mb-10"></i>
-                <h3 class="text-5xl font-black italic mb-6">Proficiency Shield</h3>
-                <p class="text-white/40 text-xl font-bold mb-12">15 Clinical Questions • 05:00 Minutes<br>Passing Requirement: 13/15</p>
-                <button onclick="executeTest('prof')" class="btn-titan">Start Now</button>
-            </div>
-        </section>
-
-        <section id="module-revision" class="hidden py-20 text-center animate-fade">
-            <div class="max-w-2xl mx-auto border-2 border-red-500/30 p-20 rounded-[3rem] bg-red-500/5">
-                <i class="fas fa-triangle-exclamation text-7xl text-red-500 mb-10"></i>
-                <h3 class="text-5xl font-black italic mb-6 text-red-500">Shield Breached</h3>
-                <p class="text-white/60 text-xl font-bold mb-12">You failed to meet the clinical accuracy of 85%.<br>System has locked the Mock Test.</p>
-                <div class="text-left bg-black/40 p-8 rounded-2xl mb-12 border border-white/5 font-mono text-sm">
-                    <p class="text-red-400 font-bold mb-2">ERROR LOG:</p>
-                    <p>> Weakness: Hormonal Regulation Calculations</p>
-                    <p>> Weakness: Diagram labeling Accuracy (Fig 3.2)</p>
+                <div onclick="loadSubject('PHYS')" class="p-20 border border-gray-100 rounded-3xl hover:bg-red-50 transition cursor-pointer">
+                    <i class="fas fa-atom text-4xl text-red-500 mb-6"></i>
+                    <h4 class="text-2xl font-bold">PHYSICS</h4>
                 </div>
-                <button onclick="startMode('book')" class="btn-titan bg-red-600 text-white border-none">Force Revision Engine</button>
+                <div onclick="loadSubject('CHEM')" class="p-20 border border-gray-100 rounded-3xl hover:bg-blue-50 transition cursor-pointer">
+                    <i class="fas fa-flask text-4xl text-blue-500 mb-6"></i>
+                    <h4 class="text-2xl font-bold">CHEMISTRY</h4>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="module-mock" class="hidden py-20 text-center animate-fade">
-            <div class="max-w-2xl mx-auto border border-gold/30 p-20 rounded-[3rem] bg-gold/5">
-                <i class="fas fa-crown text-7xl text-gold mb-10"></i>
-                <h3 class="text-5xl font-black italic mb-6 text-gold">Supreme Mock Drill</h3>
-                <p class="text-white/40 text-xl font-bold mb-12">40 Advanced Questions • 15:00 Minutes<br>Chapter-Specific Master Drill</p>
-                <button onclick="executeTest('mock')" class="btn-titan bg-gold !text-black">Enter Drill</button>
+    <section id="p-chapters" class="hidden min-h-screen p-20 bg-[#FBFBFB]">
+        <div id="chapter-grid" class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-7xl mx-auto"></div>
+    </section>
+
+    <section id="p-book" class="hidden min-h-screen p-20 bg-[#F5F5F7]">
+        <div class="max-w-5xl mx-auto flex justify-between items-center mb-10">
+            <h3 id="book-ch-title" class="text-4xl font-black tracking-tighter">Human Reproduction</h3>
+            <div class="flex items-center gap-6">
+                <button onclick="flip(-1)" class="w-12 h-12 border border-black/10 rounded-full hover:bg-black hover:text-white transition"><i class="fas fa-chevron-left"></i></button>
+                <span id="page-num" class="font-bold text-sm tracking-widest uppercase">Page 01 / 10</span>
+                <button onclick="flip(1)" class="w-12 h-12 border border-black/10 rounded-full hover:bg-black hover:text-white transition"><i class="fas fa-chevron-right"></i></button>
             </div>
-        </section>
+        </div>
 
-    </main>
+        <div class="book-manuscript fade-in" id="book-content">
+            </div>
+
+        <div id="finish-btn-container" class="hidden text-center mt-12">
+            <button onclick="startTest('prof')" class="btn-medical">CONCLUDE STUDY: START PROFICIENCY TEST</button>
+        </div>
+    </section>
+
+    <section id="p-test" class="hidden min-h-screen flex flex-col items-center justify-center p-20 text-center">
+        <div id="test-timer" class="text-8xl font-black mb-10 tabular-nums">05:00</div>
+        <h2 id="test-title" class="text-4xl font-bold mb-4 italic">Proficiency Shield</h2>
+        <p class="text-gray-400 mb-16" id="test-desc">15 Questions • Required: 13/15 to unlock Mock Test.</p>
+        <div class="w-full max-w-4xl p-20 border-2 border-dashed border-gray-200 rounded-[4rem]">
+            <p class="text-2xl font-medium text-gray-400">Clinical Test Environment Active...</p>
+        </div>
+        <button onclick="finishTest()" class="mt-20 btn-medical">SUBMIT ANSWERS</button>
+    </section>
+
+    <section id="p-revision" class="hidden min-h-screen flex flex-col items-center justify-center p-20 text-center">
+        <i class="fas fa-exclamation-triangle text-8xl text-red-500 mb-10"></i>
+        <h2 class="text-6xl font-black text-red-500 mb-6">SHIELD BREACHED.</h2>
+        <p class="text-2xl mb-12 max-w-2xl">Accuracy below 85%. You have failed the Proficiency Test. System is forcing a mandatory revision of the chapter.</p>
+        <button onclick="nav('book')" class="btn-medical !bg-red-600">RE-READ CHAPTER</button>
+    </section>
 
     <script>
-        let state = {
-            ch: "Human Reproduction",
-            page: 1,
-            timer: null,
-            profPassed: false
+        let state = { sub: '', ch: '', page: 1, timer: null, testType: '' };
+
+        const CHAPTERS = {
+            BIO: ["The Living World", "Biological Classification", "Plant Kingdom", "Animal Kingdom", "Morphology", "Anatomy", "Structural Org", "Cell: Unit of Life", "Biomolecules", "Cell Cycle", "Transport", "Mineral Nutrition", "Photosynthesis", "Respiration", "Growth", "Digestion", "Breathing", "Body Fluids", "Excretion", "Locomotion"],
+            PHYS: ["Units & Measures", "1D Motion", "2D Motion", "Laws of Motion", "Work Energy", "Rotational", "Gravitation", "Solids", "Fluids", "Thermal", "Thermodynamics", "Kinetic Theory", "Oscillations", "Waves", "Electrostatics", "Current", "Magnetism", "EMI", "AC", "Ray Optics"],
+            CHEM: ["Basic Concepts", "Atomic Structure", "Periodic Table", "Chemical Bonding", "States of Matter", "Thermodynamics", "Equilibrium", "Redox", "Hydrogen", "s-Block", "p-Block", "Organic GOC", "Hydrocarbons", "Solid State", "Solutions", "Electrochem", "Kinetics", "Surface Chem", "Inorganic", "Biomolecules"]
         };
 
-        const PAGE_MAP = {
-            1: "Core Concept & Background Dissection",
-            2: "Primary Anatomical Structures",
-            3: "Physiological Pathways (Part 1)",
-            4: "Physiological Pathways (Part 2)",
-            5: "Clinical Implications & Summary",
-            6: "Titan Formula Matrix (Physics/Chem Integration)",
-            7: "Quantitative Constants & Units",
-            8: "Clinical Revision Tips (Dr. Reyansh Exclusive)",
-            9: "Final Quick-Look Synthesis",
-            10: "Titan Motivation & Study Conclusion"
-        };
-
-        function startMode(m) {
-            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
-            document.getElementById('module-' + m).classList.remove('hidden');
+        function nav(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
+            document.getElementById('p-' + id).classList.remove('hidden');
             window.scrollTo(0,0);
+        }
+
+        function loadSubject(s) {
+            state.sub = s;
+            const grid = document.getElementById('chapter-grid');
+            grid.innerHTML = CHAPTERS[s].map(name => `
+                <div onclick="openChapter('${name}')" class="bg-white p-8 border border-gray-100 rounded-xl cursor-pointer hover:border-black transition">
+                    <h5 class="font-bold text-lg tracking-tight">${name}</h5>
+                </div>
+            `).join('');
+            nav('chapters');
+        }
+
+        function openChapter(name) {
+            state.ch = name;
+            state.page = 1;
+            document.getElementById('book-ch-title').innerText = name;
+            renderBookPage();
+            nav('book');
         }
 
         function flip(d) {
             if(d === 1 && state.page < 10) state.page++;
             if(d === -1 && state.page > 1) state.page--;
-            
-            document.getElementById('page-desc').innerText = `Page ${String(state.page).padStart(2, '0')}: ${PAGE_MAP[state.page]}`;
-            
-            if(state.page === 10) {
-                document.getElementById('completion-trigger').classList.remove('hidden');
-                document.getElementById('btn-next').classList.add('opacity-20');
-            } else {
-                document.getElementById('completion-trigger').classList.add('hidden');
-                document.getElementById('btn-next').classList.remove('opacity-20');
-            }
-            renderPage();
+            renderBookPage();
         }
 
-        function renderPage() {
-            const container = document.getElementById('page-content');
-            let html = `<div class="page-animate space-y-12">`;
-
+        function renderBookPage() {
+            const content = document.getElementById('book-content');
+            document.getElementById('page-num').innerText = `Page ${String(state.page).padStart(2, '0')} / 10`;
+            document.getElementById('finish-btn-container').classList.toggle('hidden', state.page !== 10);
+            
+            let html = `<div class="fade-in">`;
+            
             if(state.page <= 5) {
                 html += `
-                    <h4 class="text-7xl font-black italic text-blue-500 mb-10">Dissection 0${state.page}</h4>
-                    <p class="text-4xl leading-relaxed text-white/70 font-medium">
-                        This section explains the clinical foundation of <b>${state.ch}</b>. Focusing on the NCERT core markers, we analyze the biological triggers and the anatomical synchronization.
-                    </p>
-                    <div class="grid grid-cols-2 gap-10 mt-16">
-                        <div class="p-10 border border-white/10 rounded-3xl bg-white/5">
-                            <h5 class="text-xs font-black uppercase text-white/30 mb-4 tracking-widest">NCERT Marker</h5>
-                            <p class="text-2xl italic font-bold">"Refer to page 45 of NCERT for the specific flowchart regarding ${state.ch}."</p>
-                        </div>
-                        <div class="p-10 border border-white/10 rounded-3xl bg-blue-600">
-                            <h5 class="text-xs font-black uppercase text-white/10 mb-4 tracking-widest">Titan Insight</h5>
-                            <p class="text-2xl font-black">NEET 2026 Prediction: Focus on the transition phase between page 2 and 3.</p>
-                        </div>
+                    <h4 class="text-xs font-black text-blue-600 uppercase tracking-widest mb-10">Section 0${state.page}: Deep Dissection</h4>
+                    <h2 class="text-7xl font-black tracking-tighter mb-10">Understanding the Clinical foundations of ${state.ch}.</h2>
+                    <div class="space-y-8 text-xl leading-[1.8] text-gray-500">
+                        <p>This chapter serves as a critical pillar in your BIPC journey for the 2026-2028 batch. In this section, we explore the historical and biological context of ${state.ch}, ensuring that every NCERT marker is translated into clinical knowledge.</p>
+                        <p>Detailed analysis reveals that ${state.ch} is not just about memorization, but about understanding the synchronization of systems. As we progress through these 10 pages, focus on the bolded keywords and diagrammatic hints provided below each paragraph.</p>
+                        <p class="italic text-gray-800 font-medium">"Note: In the recent NEET trends, questions from this section focus heavily on the exceptions rather than the rules."</p>
                     </div>
                 `;
-            } else if(state.page === 6 || state.page === 7) {
+            } else if(state.page <= 7) {
                 html += `
-                    <h4 class="text-7xl font-black italic text-gold mb-10">Formula Matrix</h4>
-                    <div class="space-y-8">
-                        <div class="formula-card"><p class="text-3xl text-gold font-bold">Rate (R) = k [A]^x [B]^y</p><p class="text-sm opacity-40 mt-2">Order of Reaction Dissection</p></div>
-                        <div class="formula-card"><p class="text-3xl text-gold font-bold">F = G (m1m2 / r^2)</p><p class="text-sm opacity-40 mt-2">Gravitational Clinical Constant</p></div>
-                        <div class="formula-card"><p class="text-3xl text-gold font-bold">pH = -log[H+]</p><p class="text-sm opacity-40 mt-2">Ionic Equilibrium Shift</p></div>
+                    <h4 class="text-xs font-black text-blue-600 uppercase tracking-widest mb-10">Section 0${state.page}: Numerical & Constant Matrix</h4>
+                    <div class="formula-box">
+                        <p class="text-sm opacity-50 mb-4 tracking-widest uppercase font-sans">Formula Engine Active</p>
+                        <p class="text-4xl font-bold">ΔG = ΔH - TΔS</p>
+                        <p class="text-sm mt-6 text-blue-600 font-sans font-bold">Used for predicting spontaneity in chemical systems related to ${state.ch}.</p>
                     </div>
+                    <div class="formula-box">
+                        <p class="text-4xl font-bold">V = I × R</p>
+                        <p class="text-sm mt-6 text-blue-600 font-sans font-bold">Applied in physiological signal modeling.</p>
+                    </div>
+                    <p class="mt-10 text-gray-400">If this chapter lacks specific formulas, focus on the <strong>Quantitative Ratios</strong> and <strong>Clinical Values</strong> listed in the NCERT Appendix for ${state.ch}.</p>
                 `;
             } else if(state.page === 8) {
                 html += `
-                    <h4 class="text-7xl font-black italic text-blue-500 mb-10">8 Revision Tips</h4>
-                    <div class="grid grid-cols-2 gap-6">
-                        ${Array(8).fill(0).map((_, i) => `
-                            <div class="revision-tip">
-                                <span class="w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center font-black">${i+1}</span>
-                                <p class="text-lg font-bold">Tip: Review the ${['diagram labeling', 'exception cases', 'constant values', 'hormonal flow', 'historical dates', 'scientist names', 'process flow', 'previous year trends'][i]} thoroughly.</p>
-                            </div>
-                        `).join('')}
-                    </div>
+                    <h2 class="text-5xl font-black mb-10">8 Revision Tips for ${state.ch}.</h2>
+                    <ul class="space-y-6">
+                        ${[1,2,3,4,5,6,7,8].map(i => `<li class="flex gap-4 items-center text-xl font-medium"><span class="w-8 h-8 bg-black text-white rounded-full flex items-center justify-center text-xs">${i}</span> Master the specific flowchart on NCERT Page ${i+20}.</li>`).join('')}
+                    </ul>
                 `;
             } else if(state.page === 9) {
                 html += `
-                    <h4 class="text-7xl font-black italic text-white/40 mb-10">Final Quick-Look</h4>
-                    <div class="p-16 border-4 border-dashed border-white/10 rounded-[4rem]">
-                        <p class="text-4xl leading-relaxed font-black italic text-center">
-                            "Concentrate on the primary exceptions. If the Shield is triggered, remember: Accuracy over Speed."
-                        </p>
+                    <h2 class="text-5xl font-black mb-10">Final Quick-Look.</h2>
+                    <div class="p-10 border-4 border-gray-100 rounded-xl bg-gray-50 italic text-2xl text-gray-600">
+                        "Summarizing the high-yield points: Focus on the transition phase between Chapter 4 and this chapter. Memorize the 3 primary exceptions to the fluid mosaic model mentioned in this section."
                     </div>
                 `;
-            } else if(state.page === 10) {
+            } else {
                 html += `
-                    <h4 class="text-7xl font-black italic text-blue-600 mb-10">Dr. Reyansh Motivation</h4>
+                    <h2 class="text-7xl font-black mb-10">Conclude Study.</h2>
                     <div class="space-y-10">
-                        <p class="text-5xl font-black italic leading-tight">"You have dissected the core. The clinical seat is yours. Do not fear the Shield; master the accuracy."</p>
-                        <p class="text-2xl text-white/30 uppercase tracking-[1em]">Study Phase Concluded</p>
+                        <p class="text-4xl italic text-gray-400">"The clinical seat is not a dream; it is a calculated result of your discipline. You have mastered the book. Now, survive the shield."</p>
+                        <p class="text-xs font-bold uppercase tracking-[1em]">Study Session Finished</p>
                     </div>
                 `;
             }
 
             html += `</div>`;
-            container.innerHTML = html;
+            content.innerHTML = html;
         }
 
-        function executeTest(type) {
-            const timerEl = document.getElementById('global-timer');
-            timerEl.classList.remove('hidden');
-            let seconds = type === 'prof' ? 300 : 900;
-
+        function startTest(type) {
+            state.testType = type;
+            nav('test');
+            let sec = type === 'prof' ? 300 : 900;
+            document.getElementById('test-title').innerText = type === 'prof' ? 'Proficiency Shield' : 'Supreme Mock Drill';
+            document.getElementById('test-desc').innerText = type === 'prof' ? '15 Questions • 5 Minutes • Accuracy Required: 85%' : '40 Questions • 15 Minutes • Chapter Mastery';
+            
             clearInterval(state.timer);
             state.timer = setInterval(() => {
-                let m = Math.floor(seconds / 60);
-                let s = seconds % 60;
-                timerEl.innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-                if(seconds <= 0) {
-                    clearInterval(state.timer);
-                    finishTest(type);
-                }
-                seconds--;
+                let m = Math.floor(sec / 60);
+                let s = sec % 60;
+                document.getElementById('test-timer').innerText = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+                if(sec <= 0) { clearInterval(state.timer); finishTest(); }
+                sec--;
             }, 1000);
-            
-            // Logic for "Entering Test Environment"
-            document.body.style.background = "#000";
-            alert(`ENTERING ${type.toUpperCase()} ENVIRONMENT...`);
         }
 
-        function finishTest(type) {
-            document.getElementById('global-timer').classList.add('hidden');
-            if(type === 'prof') {
-                // Simulating a Fail/Pass for the demo
-                let pass = confirm("Did you score 13/15 or higher?");
-                if(pass) {
-                    alert("PROFICIENCY SHIELD ACTIVE. 3 MINUTE BREAK GRANTED.");
-                    setTimeout(() => { startMode('mock'); }, 3000); // Quick skip for demo
+        function finishTest() {
+            clearInterval(state.timer);
+            if(state.testType === 'prof') {
+                let passed = confirm("SYSTEM CHECK: Did Candidate score 13/15 or higher?");
+                if(passed) {
+                    alert("SHIELD ACTIVE. 3 MINUTE BREAK GRANTED. UNLOCKING MOCK TEST.");
+                    setTimeout(() => startTest('mock'), 3000);
                 } else {
-                    startMode('revision');
+                    nav('revision');
                 }
             } else {
                 alert("MOCK DRILL COMPLETED. RANK INDEXING STARTED.");
-                location.reload();
+                nav('timeline');
             }
         }
-
-        // Initialize Page 1
-        renderPage();
     </script>
 </body>
 </html>
