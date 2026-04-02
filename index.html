@@ -3,354 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC TITAN | 2026-2028 PREMIER</title>
+    <title>BIPC TITAN | PREMIER 2026-2028</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
 
     <style>
-        /* =========================================================
-           1. OBSIDIAN DESIGN SYSTEM (LINES 20 - 250)
-           =========================================================
-        */
         :root {
             --gold: #D4AF37;
             --deep-black: #050505;
-            --soft-black: #121212;
-            --accent-blue: #007AFF;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: 1px solid rgba(255, 255, 255, 0.1);
+            --soft-black: #0f0f0f;
+            --accent: #007AFF;
+            --border: 1px solid rgba(255,255,255,0.1);
         }
 
         body { 
             font-family: 'Inter', sans-serif; 
-            background: var(--deep-black);
-            color: #ffffff;
+            background: var(--deep-black); 
+            color: #fff; 
             overflow-x: hidden;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
 
-        h1, h2, h3, .titan-font { font-family: 'Space Grotesk', sans-serif; }
-
-        /* PREMIUM GLASSMORPHISM */
         .premium-card {
-            background: var(--glass);
-            backdrop-filter: blur(25px);
+            background: rgba(255,255,255,0.02);
+            backdrop-filter: blur(20px);
             border: var(--border);
-            border-radius: 2rem;
-            transition: 0.5s cubic-bezier(0.2, 1, 0.2, 1);
-        }
-        .premium-card:hover {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-5px);
+            border-radius: 1.5rem;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.2, 1);
         }
 
-        /* VIDEO THEATRE ENGINE */
-        .video-viewport {
-            width: 100%;
-            aspect-ratio: 16/9;
-            background: #000;
-            border-radius: 2rem;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,1);
+        .phase-locked {
+            filter: grayscale(1) blur(2px);
+            opacity: 0.4;
+            cursor: not-allowed !important;
+            position: relative;
         }
 
-        /* NAVIGATION PILLS */
-        .nav-link {
-            padding: 1rem 2rem;
-            border-radius: 100px;
-            font-weight: 600;
-            transition: 0.3s;
-            cursor: pointer;
-            border: 1px solid transparent;
+        .lock-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            z-index: 10;
         }
-        .nav-link.active {
+
+        .btn-titan {
             background: #fff;
             color: #000;
-        }
-        .nav-link:hover:not(.active) {
-            background: var(--glass);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        /* BUTTONS */
-        .btn-gold {
-            background: #ffffff;
-            color: #000;
-            padding: 1.5rem 4rem;
+            padding: 1.2rem 3rem;
             border-radius: 100px;
             font-weight: 900;
             text-transform: uppercase;
-            transition: 0.4s;
-            display: inline-flex;
-            align-items: center;
-            gap: 1rem;
-        }
-        .btn-gold:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255,255,255,0.2);
-        }
-
-        /* CUSTOM INPUTS */
-        .titan-input {
-            width: 100%;
-            padding: 1.5rem;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 1rem;
-            color: #fff;
-            outline: none;
             transition: 0.3s;
         }
-        .titan-input:focus {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--accent-blue);
+
+        .btn-titan:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(255,255,255,0.2); }
+
+        .book-container {
+            background: #0a0a0a;
+            border-radius: 2rem;
+            min-height: 800px;
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 4rem;
         }
 
-        /* ANIMATIONS */
-        @keyframes subtle-glow {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+        .formula-box {
+            background: rgba(0,122,255,0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
         }
-        .glow-dot { animation: subtle-glow 2s infinite; }
 
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #000; }
+        .ai-glow { box-shadow: 0 0 50px rgba(0,122,255,0.2); border: 1px solid var(--accent); }
+
+        /* SCROLLBAR */
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <section id="p-home" class="min-h-screen flex items-center justify-center p-8 relative">
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div class="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-blue-900/20 blur-[200px] rounded-full"></div>
-            <div class="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-purple-900/10 blur-[200px] rounded-full"></div>
-        </div>
-
-        <div class="max-w-7xl w-full text-center z-10">
-            <div class="inline-flex items-center gap-4 px-6 py-2 border border-white/10 rounded-full bg-white/5 mb-12">
-                <span class="w-2 h-2 rounded-full bg-blue-500 glow-dot"></span>
-                <span class="text-xs font-black tracking-[0.3em] uppercase opacity-60">Dr. Reyansh Supreme Edition</span>
+    <section id="p-home" class="min-h-screen flex items-center justify-center p-8 text-center">
+        <div class="max-w-5xl">
+            <div class="inline-block px-6 py-2 border border-white/10 rounded-full bg-white/5 mb-8 text-xs font-bold tracking-[0.4em] uppercase text-white/50">
+                Dr. Reyansh Supreme Protocol
             </div>
-            
-            <h1 class="text-[8rem] md:text-[12rem] font-black tracking-tighter leading-[0.85] mb-8">
-                BIPC <span class="text-blue-600">TITAN</span>.
-            </h1>
-            
-            <h2 class="text-3xl md:text-5xl font-light text-white/40 mb-20 tracking-tight">
-                Class 11 & 12 • <span class="text-white font-medium">Batch 2026 - 2028</span>
-            </h2>
-
-            <div class="flex flex-col md:flex-row gap-8 justify-center items-center">
-                <button onclick="nav('auth')" class="btn-gold">Access Portal <i class="fas fa-arrow-right"></i></button>
-                <div class="text-white/30 font-medium text-lg border-l border-white/10 pl-8">
-                    Premium NCERT Dissection<br>Clinical Retained Matrix
-                </div>
-            </div>
+            <h1 class="text-[8rem] font-black italic tracking-tighter leading-none mb-6">TITAN <span class="text-blue-600">BIPC</span></h1>
+            <p class="text-3xl text-white/40 font-medium mb-16 italic">Class 11 & 12 • Batch 2026 - 2028</p>
+            <button onclick="nav('reg')" class="btn-titan">Begin Registration <i class="fas fa-chevron-right ml-4"></i></button>
         </div>
     </section>
 
-    <section id="p-auth" class="hidden min-h-screen flex items-center justify-center p-8">
-        <div class="premium-card w-full max-w-xl p-16">
-            <div class="text-center mb-12">
-                <i class="fas fa-shield-halved text-6xl text-blue-500 mb-6"></i>
-                <h3 class="text-4xl font-bold mb-2">Portal Entry</h3>
-                <p class="text-white/40 text-sm uppercase tracking-widest">Candidate Verification Required</p>
-            </div>
-            
+    <section id="p-reg" class="hidden min-h-screen flex items-center justify-center p-8">
+        <div class="premium-card w-full max-w-2xl p-16">
+            <h3 class="text-5xl font-black italic mb-12">User Profile</h3>
             <div class="space-y-8">
-                <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase opacity-40 ml-1">Clinical ID</label>
-                    <input type="text" value="REYANSH_SUPREME_2026" class="titan-input" readonly>
+                <div class="flex items-center gap-8 mb-12">
+                    <div class="w-24 h-24 bg-blue-600 rounded-2xl flex items-center justify-center text-4xl font-black">R</div>
+                    <div>
+                        <p class="text-2xl font-bold">Reyansh Supreme</p>
+                        <p class="text-white/40 uppercase text-xs font-black tracking-widest">Candidate ID: BIPC-2026-001</p>
+                    </div>
                 </div>
-                <div class="space-y-2">
-                    <label class="text-xs font-bold uppercase opacity-40 ml-1">Access Key</label>
-                    <input type="password" placeholder="••••••••" class="titan-input">
-                </div>
-                <button onclick="nav('dash')" class="w-full py-6 bg-blue-600 hover:bg-blue-500 text-white rounded-xl font-bold text-xl transition shadow-xl">AUTHENTICATE</button>
+                <input type="email" value="reyansh.supreme@bipc.titan" class="w-full p-6 bg-white/5 border border-white/10 rounded-xl font-bold" readonly>
+                <button onclick="nav('timeline')" class="w-full py-6 bg-white text-black rounded-xl font-black text-xl hover:bg-blue-600 hover:text-white transition">ACCESS TIMELINE</button>
             </div>
         </div>
     </section>
 
-    <section id="p-dash" class="hidden min-h-screen flex flex-col bg-[#080808]">
-        <nav class="border-b border-white/5 bg-black/50 backdrop-blur-md sticky top-0 z-[100] px-12 py-6 flex justify-between items-center">
-            <div class="flex items-center gap-6">
-                <div class="w-12 h-12 bg-white text-black rounded-lg flex items-center justify-center font-black text-2xl italic">T</div>
+    <section id="p-timeline" class="hidden min-h-screen p-12">
+        <header class="flex justify-between items-center mb-20">
+            <h2 class="text-4xl font-black italic">TIMELINE <span class="text-blue-500">2026-2028</span></h2>
+            <button onclick="nav('home')" class="text-red-500 text-3xl"><i class="fas fa-power-off"></i></button>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div onclick="nav('subject-select')" class="premium-card p-12 group cursor-pointer border-blue-500/30 bg-blue-500/5">
+                <h4 class="text-xs font-black text-blue-500 uppercase tracking-widest mb-4">Phase 01</h4>
+                <h3 class="text-6xl font-black italic mb-6">2026</h3>
+                <p class="text-white/40 font-bold mb-10">Foundation & Class 11 Syllabus Matrix Unlocked.</p>
+                <span class="text-sm font-black uppercase text-blue-500">Active Access <i class="fas fa-arrow-right ml-2"></i></span>
+            </div>
+
+            <div class="premium-card p-12 phase-locked">
+                <i class="fas fa-lock lock-icon"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest mb-4">Phase 02</h4>
+                <h3 class="text-6xl font-black italic mb-6">2027</h3>
+                <p class="text-white/40 font-bold">Unlocks Class 12 Advanced Clinical Dissection.</p>
+            </div>
+
+            <div class="premium-card p-12 phase-locked">
+                <i class="fas fa-lock lock-icon"></i>
+                <h4 class="text-xs font-black uppercase tracking-widest mb-4">Phase 03</h4>
+                <h3 class="text-6xl font-black italic mb-6">2028</h3>
+                <p class="text-white/40 font-bold">Unlocks Final Mock Drills & Rank Indexing.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="p-subject-select" class="hidden min-h-screen p-12 flex flex-col items-center justify-center">
+        <h2 class="text-7xl font-black italic mb-20">Select <span class="text-blue-500">Domain</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 w-full max-w-6xl">
+            <button onclick="loadSubject('BIO')" class="premium-card p-20 hover:border-green-500/50">
+                <i class="fas fa-dna text-7xl text-green-500 mb-8"></i>
+                <h4 class="text-4xl font-black uppercase">Biology</h4>
+                <p class="text-white/40 font-bold mt-4">20 High-Yield Chapters</p>
+            </button>
+            <button onclick="loadSubject('PHYS')" class="premium-card p-20 hover:border-red-500/50">
+                <i class="fas fa-atom text-7xl text-red-500 mb-8"></i>
+                <h4 class="text-4xl font-black uppercase">Physics</h4>
+                <p class="text-white/40 font-bold mt-4">20 High-Yield Chapters</p>
+            </button>
+            <button onclick="loadSubject('CHEM')" class="premium-card p-20 hover:border-blue-500/50">
+                <i class="fas fa-flask text-7xl text-blue-500 mb-8"></i>
+                <h4 class="text-4xl font-black uppercase">Chemistry</h4>
+                <p class="text-white/40 font-bold mt-4">20 High-Yield Chapters</p>
+            </button>
+        </div>
+    </section>
+
+    <section id="p-engine" class="hidden min-h-screen flex">
+        <aside class="w-24 bg-black border-r border-white/10 flex flex-col items-center py-12 gap-12">
+            <button onclick="switchMode('book')" class="text-3xl hover:text-blue-500 transition"><i class="fas fa-book"></i></button>
+            <button onclick="switchMode('prof')" class="text-3xl hover:text-yellow-500 transition"><i class="fas fa-bolt"></i></button>
+            <button onclick="switchMode('mock')" class="text-3xl hover:text-red-500 transition"><i class="fas fa-file-invoice"></i></button>
+            <button onclick="switchMode('ai')" class="text-3xl hover:text-blue-400 transition"><i class="fas fa-robot"></i></button>
+            <button onclick="nav('timeline')" class="mt-auto text-white/20 hover:text-white"><i class="fas fa-times-circle text-3xl"></i></button>
+        </aside>
+
+        <main class="flex-1 p-12 overflow-y-auto">
+            <header class="mb-12 flex justify-between items-center border-b border-white/5 pb-8">
                 <div>
-                    <h4 class="font-bold text-xl tracking-tighter">TITAN PREMIER</h4>
-                    <p class="text-[10px] uppercase font-black text-white/30 tracking-widest">BIPC Batch 26-28</p>
+                    <h2 id="engine-title" class="text-5xl font-black italic tracking-tighter">Human Reproduction</h2>
+                    <p id="engine-subtitle" class="text-xs uppercase font-black text-white/30 tracking-widest mt-2">Section: NCERT Digital Manuscript</p>
                 </div>
-            </div>
-            
-            <div class="flex gap-4">
-                <div id="tab-v" onclick="switchTab('video')" class="nav-link active">Video Dissection</div>
-                <div id="tab-b" onclick="switchTab('book')" class="nav-link">NCERT Manuscript</div>
-                <div id="tab-l" onclick="switchTab('library')" class="nav-link">Matrix Index</div>
-            </div>
+                <div id="timer" class="hidden text-3xl font-black text-red-500">05:00</div>
+            </header>
 
-            <div class="flex items-center gap-6">
-                <div class="text-right hidden md:block">
-                    <p class="text-sm font-bold">Dr. Reyansh</p>
-                    <p class="text-[10px] text-green-500 font-bold uppercase">Sync Active</p>
-                </div>
-                <button onclick="nav('home')" class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-red-500 hover:bg-red-500/10 transition">
-                    <i class="fas fa-power-off"></i>
-                </button>
-            </div>
-        </nav>
-
-        <main class="flex-1 p-12 max-w-[1600px] mx-auto w-full">
-            
-            <div id="view-video" class="tab-content space-y-12">
-                <div class="video-viewport">
-                    <iframe id="titan-video" src="https://www.youtube.com/embed/S9Vz7t2-lpk?rel=0&modestbranding=1" frameborder="0" allowfullscreen class="w-full h-full"></iframe>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="premium-card p-10">
-                        <h5 class="text-blue-500 font-bold uppercase text-xs mb-4 tracking-widest">Active Chapter</h5>
-                        <h4 id="active-ch-name" class="text-4xl font-bold italic tracking-tighter">Human Reproduction</h4>
-                    </div>
-                    <div class="premium-card p-10">
-                        <h5 class="text-white/40 font-bold uppercase text-xs mb-4 tracking-widest">NCERT Focus</h5>
-                        <p id="active-ch-focus" class="text-xl font-medium">Gametogenesis & Hormonal Cycles</p>
-                    </div>
-                    <div class="premium-card p-10">
-                        <h5 class="text-white/40 font-bold uppercase text-xs mb-4 tracking-widest">NEET Weightage</h5>
-                        <p class="text-4xl font-bold text-green-500 italic">Supreme</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="view-book" class="tab-content hidden">
-                <div class="premium-card min-h-[900px] p-20 relative overflow-hidden">
-                    <div class="flex justify-between items-center mb-20 border-b border-white/10 pb-10">
-                        <h3 id="book-title" class="text-6xl font-bold italic tracking-tighter">Human Reproduction</h3>
-                        <div class="flex items-center gap-8">
-                            <button onclick="changePage(-1)" class="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition text-2xl"><i class="fas fa-chevron-left"></i></button>
-                            <span id="page-indicator" class="text-3xl font-bold italic tracking-tighter text-blue-500">Page 01</span>
-                            <button onclick="changePage(1)" class="w-16 h-16 rounded-full border border-white/10 flex items-center justify-center hover:bg-white hover:text-black transition text-2xl"><i class="fas fa-chevron-right"></i></button>
+            <div id="mode-book" class="space-y-12">
+                <div class="book-container">
+                    <div class="flex justify-between items-center mb-16 border-b border-white/5 pb-8">
+                        <span id="page-indicator" class="text-2xl font-black italic">Page 01 / 10</span>
+                        <div class="flex gap-4">
+                            <button onclick="flip(-1)" class="px-8 py-3 border border-white/10 rounded-xl hover:bg-white hover:text-black font-bold">Prev</button>
+                            <button onclick="flip(1)" class="px-8 py-3 border border-white/10 rounded-xl hover:bg-white hover:text-black font-bold">Next</button>
                         </div>
                     </div>
-                    
-                    <div id="book-content" class="space-y-12 max-w-4xl">
+                    <div id="ncert-viewer" class="prose prose-invert max-w-none">
                         </div>
                 </div>
             </div>
 
-            <div id="view-library" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div id="mode-prof" class="hidden space-y-12">
+                <div class="premium-card p-12 text-center">
+                    <h3 class="text-6xl font-black italic mb-6">Proficiency Shield</h3>
+                    <p class="text-white/40 text-xl mb-12">15 Questions • 5 Minutes • Instant Recalibration</p>
+                    <button class="btn-titan" onclick="startTest(15, 5)">Execute Test</button>
                 </div>
+            </div>
 
+            <div id="mode-mock" class="hidden space-y-12">
+                <div class="premium-card p-12 text-center border-red-500/30">
+                    <h3 class="text-6xl font-black italic mb-6 text-red-500">Omega Mock Drill</h3>
+                    <p class="text-white/40 text-xl mb-12">90 Questions • 45 Minutes • BIPC Full Spectrum</p>
+                    <button class="btn-titan bg-red-600 text-white" onclick="startTest(90, 45)">Start Mock</button>
+                </div>
+            </div>
+
+            <div id="mode-ai" class="hidden space-y-12">
+                <div class="premium-card p-12 ai-glow">
+                    <h3 class="text-4xl font-black italic mb-8">AI NEET Solver Alpha</h3>
+                    <div class="h-96 bg-black/40 rounded-2xl mb-8 p-8 font-mono text-blue-400 overflow-y-auto" id="ai-log">
+                        [SYSTEM] Ready for clinical query dissection...
+                    </div>
+                    <div class="flex gap-4">
+                        <input type="text" placeholder="Upload question or type query..." class="flex-1 p-6 bg-white/5 border border-white/10 rounded-xl outline-none focus:border-blue-500 font-bold">
+                        <button class="px-12 bg-blue-600 rounded-xl font-black">SOLVE</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </section>
 
-    <script>
-        const MATRIX = [
-            { id: 1, name: "The Living World", sub: "BIO", vid: "BV3f6_7_v4A", detail: "Taxonomic Hierarchy & Binomial Nomenclature rules." },
-            { id: 2, name: "Units & Dimensions", sub: "PHYS", vid: "f56S11Q_R0U", detail: "Dimensional analysis of G, h, and viscosity coefficients." },
-            { id: 3, name: "Atomic Structure", sub: "CHEM", vid: "MT6K-qY9U9M", detail: "Quantum Numbers and Heisenberg Uncertainty Principle." },
-            { id: 4, name: "Cell: Unit of Life", sub: "BIO", vid: "S9Vz7t2-lpk", detail: "Fluid Mosaic Model and Endomembrane System logic." },
-            { id: 5, name: "Motion in 1D", sub: "PHYS", vid: "XW_GfE-WpC0", detail: "Relative velocity and calculus-based kinematics." },
-            { id: 6, name: "Periodic Table", sub: "CHEM", vid: "O-2Yk85F1kE", detail: "Electronegativity trends and shielding effect." },
-            { id: 7, name: "Plant Kingdom", sub: "BIO", vid: "E-52uK6YlOk", detail: "Haplontic vs Diplontic cycles and Algae classification." },
-            { id: 8, name: "Ray Optics", sub: "PHYS", vid: "BV3f6_7_v4A", detail: "Lens Maker Formula and Total Internal Reflection." },
-            { id: 9, name: "Chemical Bonding", sub: "CHEM", vid: "f56S11Q_R0U", detail: "VSEPR Theory and Molecular Orbital Geometry." },
-            { id: 10, name: "Human Reproduction", sub: "BIO", vid: "S9Vz7t2-lpk", detail: "Spermatogenesis and Menstrual Cycle Hormones." },
-            { id: 11, name: "Electrostatics", sub: "PHYS", vid: "MT6K-qY9U9M", detail: "Gauss Law applications and Electric Flux calculation." },
-            { id: 12, name: "Equilibrium", sub: "CHEM", vid: "XW_GfE-WpC0", detail: "Le Chatelier's Principle and Ksp solubility." },
-            { id: 13, name: "Biomolecules", sub: "BIO", vid: "O-2Yk85F1kE", detail: "Amino acid structures and Enzyme competitive inhibition." },
-            { id: 14, name: "Electric Current", sub: "PHYS", vid: "E-52uK6YlOk", detail: "Kirchhoff’s laws and Potentiometer sensitivity." },
-            { id: 15, name: "Thermodynamics", sub: "CHEM", vid: "BV3f6_7_v4A", detail: "Gibbs Free Energy and First Law of Thermo." },
-            { id: 16, name: "Neural Control", sub: "BIO", vid: "f56S11Q_R0U", detail: "Action Potential and Synaptic transmission." },
-            { id: 17, name: "Magnetism", sub: "PHYS", vid: "MT6K-qY9U9M", detail: "Biot-Savart Law and Cyclotron frequency." },
-            { id: 18, name: "Solid State", sub: "CHEM", vid: "XW_GfE-WpC0", detail: "Bravais Lattices and Schottky/Frenkel defects." },
-            { id: 19, name: "Genetics", sub: "BIO", vid: "O-2Yk85F1kE", detail: "Mendelian inheritance and DNA helix symmetry." },
-            { id: 20, name: "Wave Optics", sub: "PHYS", vid: "E-52uK6YlOk", detail: "Young’s Double Slit Experiment interference." }
-        ];
+    <section id="p-chapters" class="hidden min-h-screen p-12">
+        <h2 id="subject-title" class="text-7xl font-black italic mb-20 text-center">BIOLOGY</h2>
+        <div id="chapter-grid" class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            </div>
+    </section>
 
-        let state = { current: MATRIX[9], page: 1 };
+    <script>
+        const DATA = {
+            BIO: ["Human Reproduction", "Cell: Unit of Life", "Plant Kingdom", "Genetics", "The Living World", "Animal Kingdom", "Biological Classification", "Morphology of Plants", "Anatomy of Plants", "Structural Org in Animals", "Biomolecules", "Cell Cycle", "Transport in Plants", "Mineral Nutrition", "Photosynthesis", "Respiration", "Growth", "Digestion", "Breathing", "Body Fluids"],
+            PHYS: ["Units & Measurement", "Motion in 1D", "Motion in 2D", "Laws of Motion", "Work Energy Power", "System of Particles", "Gravitation", "Solid Properties", "Fluids", "Thermal Properties", "Thermodynamics", "Kinetic Theory", "Oscillations", "Waves", "Electrostatics", "Current Electricity", "Magnetism", "EMI", "AC", "Ray Optics"],
+            CHEM: ["Some Basic Concepts", "Atomic Structure", "Classification", "Chemical Bonding", "States of Matter", "Thermodynamics", "Equilibrium", "Redox", "Hydrogen", "S-Block", "P-Block", "Organic Basic", "Hydrocarbons", "Environmental", "Solid State", "Solutions", "Electrochemistry", "Kinetics", "Surface Chem", "Inorganic Trends"]
+        };
+
+        let state = { currentSub: '', ch: '', page: 1, timer: null };
 
         function nav(id) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
             document.getElementById('p-' + id).classList.remove('hidden');
-            window.scrollTo(0,0);
         }
 
-        function switchTab(t) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-            
-            if(t === 'video') {
-                document.getElementById('view-video').classList.remove('hidden');
-                document.getElementById('tab-v').classList.add('active');
-            } else if(t === 'book') {
-                document.getElementById('view-book').classList.remove('hidden');
-                document.getElementById('tab-b').classList.add('active');
-            } else {
-                document.getElementById('view-library').classList.remove('hidden');
-                document.getElementById('tab-l').classList.add('active');
-            }
+        function loadSubject(sub) {
+            state.currentSub = sub;
+            document.getElementById('subject-title').innerText = sub;
+            const grid = document.getElementById('chapter-grid');
+            grid.innerHTML = DATA[sub].map((name, i) => `
+                <div onclick="openChapter('${name}')" class="premium-card p-8 cursor-pointer hover:bg-white hover:text-black transition">
+                    <span class="text-[10px] font-black opacity-30 uppercase tracking-widest">Chapter ${String(i+1).padStart(2, '0')}</span>
+                    <h5 class="text-2xl font-bold italic tracking-tighter mt-2">${name}</h5>
+                </div>
+            `).join('');
+            nav('chapters');
         }
 
-        function selectCh(id) {
-            state.current = MATRIX.find(m => m.id === id);
+        function openChapter(name) {
+            state.ch = name;
             state.page = 1;
-            
-            document.getElementById('titan-video').src = `https://www.youtube.com/embed/${state.current.vid}?rel=0`;
-            document.getElementById('active-ch-name').innerText = state.current.name;
-            document.getElementById('active-ch-focus').innerText = state.current.detail;
-            document.getElementById('book-title').innerText = state.current.name;
-            
-            renderBook();
-            switchTab('video');
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById('engine-title').innerText = name;
+            switchMode('book');
+            renderPage();
+            nav('engine');
         }
 
-        function changePage(d) {
+        function switchMode(m) {
+            document.querySelectorAll('[id^="mode-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('mode-' + m).classList.remove('hidden');
+            document.getElementById('engine-subtitle').innerText = "Module: " + m.toUpperCase();
+        }
+
+        function flip(d) {
             if(d === 1 && state.page < 10) state.page++;
             if(d === -1 && state.page > 1) state.page--;
-            document.getElementById('page-indicator').innerText = `Page ${String(state.page).padStart(2, '0')}`;
-            renderBook();
+            document.getElementById('page-indicator').innerText = `Page ${String(state.page).padStart(2, '0')} / 10`;
+            renderPage();
         }
 
-        function renderBook() {
-            const content = document.getElementById('book-content');
-            content.innerHTML = `
-                <div class="animate-pulse flex gap-4 mb-10">
-                    <span class="px-4 py-1 bg-blue-500/20 text-blue-500 text-xs font-bold rounded">NEET HIGH YIELD</span>
-                    <span class="px-4 py-1 bg-green-500/20 text-green-500 text-xs font-bold rounded">NCERT CORE</span>
+        function renderPage() {
+            const v = document.getElementById('ncert-viewer');
+            v.innerHTML = `
+                <h4 class="text-6xl font-black italic mb-10 text-blue-500">Section ${state.page}.0</h4>
+                <p class="text-3xl leading-relaxed text-white/70 mb-10">Clinical dissection of <b>${state.ch}</b>. This 10-page matrix focuses on high-yield NCERT pointers and competitive exceptions.</p>
+                <div class="formula-box">
+                    <p class="text-xl text-white font-bold mb-4">CRITICAL FORMULA / CONCEPT:</p>
+                    <p class="text-2xl text-blue-400">ΔG = ΔH - TΔS | Rate = k[A]^x[B]^y | F = G(m1m2/r^2)</p>
                 </div>
-                <h4 class="text-7xl font-bold tracking-tighter mb-8">Section ${state.page}.0</h4>
-                <p class="text-3xl leading-[1.6] text-white/70">
-                    Analyzing the clinical implications of <span class="text-white font-bold">${state.current.name}</span>. 
-                    The focus of this subsection is <span class="text-blue-500 font-bold">${state.current.detail}</span>.
-                </p>
-                <div class="p-12 border-l-4 border-blue-500 bg-white/5 rounded-r-2xl mt-20">
-                    <p class="text-2xl italic font-medium opacity-80 leading-relaxed">
-                        "Dr. Reyansh Insight: In the 2026 pattern, diagrams from this NCERT section are likely to be converted into Match-the-following clinical questions."
-                    </p>
+                <div class="grid grid-cols-2 gap-8 mt-12">
+                    <div class="p-8 bg-white/5 rounded-2xl border border-white/10">
+                        <h6 class="text-xs font-black uppercase text-white/30 mb-4 tracking-widest">Clinical Insight</h6>
+                        <p class="text-xl italic font-bold">"Exceptions to the general trend are frequently asked in Batch 2026 patterns."</p>
+                    </div>
+                    <div class="p-8 bg-white/5 rounded-2xl border border-white/10">
+                        <h6 class="text-xs font-black uppercase text-white/30 mb-4 tracking-widest">Diagram Analysis</h6>
+                        <p class="text-xl italic font-bold">Refer to NCERT Figure 12.4 for direct labeling practice.</p>
+                    </div>
                 </div>
             `;
         }
 
-        function init() {
-            const lib = document.getElementById('view-library');
-            lib.innerHTML = MATRIX.map(m => `
-                <div onclick="selectCh(${m.id})" class="premium-card p-10 cursor-pointer group">
-                    <div class="flex justify-between items-center mb-8">
-                        <span class="text-[10px] font-black tracking-widest text-white/30 uppercase">${m.sub} UNIT</span>
-                        <i class="fas fa-arrow-right opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition text-blue-500"></i>
-                    </div>
-                    <h4 class="text-3xl font-bold italic tracking-tighter mb-4 group-hover:text-blue-500 transition">${m.name}</h4>
-                    <p class="text-xs text-white/40 leading-relaxed">${m.detail.substring(0, 40)}...</p>
-                </div>
-            `).join('');
-            selectCh(10);
-        }
+        function startTest(q, m) {
+            const timerEl = document.getElementById('timer');
+            timerEl.classList.remove('hidden');
+            let timeLeft = m * 60;
+            
+            clearInterval(state.timer);
+            state.timer = setInterval(() => {
+                let mins = Math.floor(timeLeft / 60);
+                let secs = timeLeft % 60;
+                timerEl.innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                if(timeLeft <= 0) {
+                    clearInterval(state.timer);
+                    alert("Time Up! Indexing Results...");
+                    timerEl.classList.add('hidden');
+                }
+                timeLeft--;
+            }, 1000);
 
-        init();
+            const v = document.getElementById('mode-prof');
+            if(q === 90) switchMode('mock');
+            // Mock test logic would generate questions here
+        }
     </script>
 </body>
 </html>
