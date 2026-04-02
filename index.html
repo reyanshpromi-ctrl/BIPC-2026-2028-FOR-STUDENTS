@@ -3,195 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC TITAN | COMMAND CENTER</title>
+    <title>BIPC TITAN | 2026-2028 CLINICAL PORTAL</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,900&display=swap" rel="stylesheet">
 
     <style>
-        :root { --medical-blue: #007AFF; --bg: #FFFFFF; }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: #1d1d1f; }
+        :root { --medical-blue: #007AFF; --bg: #FFFFFF; --border: #EAEAEA; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: #1d1d1f; scroll-behavior: smooth; }
         
-        .setup-card {
-            border: 1px solid #EEE;
-            border-radius: 32px;
-            padding: 60px;
-            background: #FFF;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.03);
-        }
-
-        .time-slot-btn {
-            border: 2px solid #EEE;
-            padding: 20px;
+        .titan-title { font-family: 'Playfair Display', serif; }
+        
+        .glass-input {
+            background: #F9F9FB;
+            border: 1px solid var(--border);
             border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            font-weight: 600;
+            outline: none;
+            transition: 0.3s;
+        }
+        .glass-input:focus { border-color: var(--medical-blue); background: #FFF; box-shadow: 0 0 0 4px rgba(0,122,255,0.05); }
+
+        .btn-primary {
+            background: #000;
+            color: #FFF;
+            padding: 22px 50px;
+            border-radius: 100px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+        }
+        .btn-primary:hover { background: var(--medical-blue); transform: scale(1.05); box-shadow: 0 20px 40px rgba(0,122,255,0.2); }
+
+        .time-chip {
+            border: 1px solid var(--border);
+            padding: 15px;
+            border-radius: 12px;
             font-weight: 700;
+            cursor: pointer;
             transition: 0.3s;
             text-align: center;
         }
-        .time-slot-btn:hover, .time-slot-btn.active {
-            border-color: var(--medical-blue);
-            background: rgba(0, 122, 255, 0.05);
-            color: var(--medical-blue);
-        }
+        .time-chip.active { background: #000; color: #FFF; border-color: #000; }
 
-        .btn-command {
-            background: #000;
-            color: #fff;
-            padding: 20px 60px;
-            border-radius: 100px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            transition: 0.4s;
-        }
-        .btn-command:hover { background: var(--medical-blue); transform: scale(1.05); }
-
-        .chapter-badge {
-            background: #F5F5F7;
-            padding: 8px 16px;
-            border-radius: 100px;
-            font-size: 10px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #888;
-        }
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <section id="setup-view" class="min-h-screen flex items-center justify-center p-6 bg-[#FAFAFA]">
-        <div class="setup-card w-full max-w-3xl text-center">
-            <div class="chapter-badge mb-6">Phase 1 Synchronization</div>
-            <h1 class="text-6xl font-black tracking-tighter mb-4">Initialize <span class="text-blue-600">Schedule.</span></h1>
-            <p class="text-gray-400 font-medium text-xl mb-16">The system will dictate 1 chapter per day. <br>3 Hours 30 Minutes per clinical session.</p>
+    <section id="view-home" class="min-h-screen flex flex-col items-center justify-center p-10 text-center">
+        <div class="fade-in">
+            <div class="mb-10 inline-flex items-center gap-3 px-6 py-2 border border-gray-100 rounded-full">
+                <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
+                <span class="text-[10px] font-black uppercase tracking-[0.4em]">Batch 2026 - 2028 Active</span>
+            </div>
+            <h1 class="titan-title text-[7rem] md:text-[11rem] leading-none mb-6 tracking-tighter">BIPC <span class="text-blue-600">Titan.</span></h1>
+            <p class="text-xl md:text-2xl text-gray-400 font-medium mb-16 max-w-2xl mx-auto">The world's most disciplined clinical prep engine. We dictate. You dominate.</p>
+            <button onclick="nav('reg')" class="btn-primary">START REGISTRATION</button>
+        </div>
+    </section>
 
-            <div class="space-y-12 text-left">
+    <section id="view-reg" class="hidden min-h-screen p-10 flex items-center justify-center bg-[#FAFAFA]">
+        <div class="w-full max-w-2xl bg-white border border-gray-100 p-16 rounded-[3rem] shadow-sm fade-in">
+            <h2 class="text-4xl font-black tracking-tighter mb-10">Candidate Enrollment</h2>
+            
+            <div class="space-y-6">
                 <div>
-                    <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Commencement Date</label>
-                    <input type="date" id="start-date" class="w-full p-6 bg-gray-50 border-none rounded-2xl text-xl font-bold outline-none ring-2 ring-transparent focus:ring-blue-500 transition">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Full Legal Name</label>
+                    <input type="text" id="user-name" placeholder="Reyansh Supreme" class="glass-input">
                 </div>
-
                 <div>
-                    <label class="block text-xs font-black uppercase tracking-widest text-gray-400 mb-4">Select 3h 30m Session Slot</label>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <button onclick="setSlot(this, '05:00 AM - 08:30 AM')" class="time-slot-btn">05:00 AM - 08:30 AM</button>
-                        <button onclick="setSlot(this, '09:00 AM - 12:30 PM')" class="time-slot-btn">09:00 AM - 12:30 PM</button>
-                        <button onclick="setSlot(this, '02:00 PM - 05:30 PM')" class="time-slot-btn">02:00 PM - 05:30 PM</button>
-                        <button onclick="setSlot(this, '06:00 PM - 09:30 PM')" class="time-slot-btn">06:00 PM - 09:30 PM</button>
-                        <button onclick="setSlot(this, '10:00 PM - 01:30 AM')" class="time-slot-btn">10:00 PM - 01:30 AM</button>
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Email Address</label>
+                    <input type="email" placeholder="reyansh@bipc.com" class="glass-input">
+                </div>
+                <div class="flex gap-4">
+                    <div class="flex-1">
+                        <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Phone No.</label>
+                        <input type="text" placeholder="+91 00000 00000" class="glass-input">
                     </div>
+                    <button onclick="sendOTP()" class="mt-6 px-8 bg-gray-100 rounded-2xl font-black text-xs hover:bg-black hover:text-white transition">SEND OTP</button>
                 </div>
-
-                <button onclick="confirmSetup()" class="w-full btn-command">SYNC MASTER SCHEDULE</button>
+                <div id="otp-area" class="hidden">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Clinical Verification Code (OTP)</label>
+                    <input type="text" placeholder="6-Digit Code" class="glass-input border-blue-200 bg-blue-50/30">
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-gray-50 rounded-2xl border border-gray-100">
+                    <input type="checkbox" id="terms" class="mt-1 w-5 h-5 accent-blue-600" checked>
+                    <p class="text-[11px] leading-relaxed text-gray-500 font-medium">
+                        I agree to the <strong>Titan Clinical Terms</strong>: I accept the 1-chapter-per-day mandate, the 3h 30m forced session timing, and the Proficiency Shield protocol. Failure to pass tests will trigger mandatory portal locking.
+                    </p>
+                </div>
+                <button onclick="validateReg()" class="w-full btn-primary !rounded-2xl">CONTINUE TO SCHEDULING</button>
             </div>
         </div>
     </section>
 
-    <section id="command-view" class="hidden min-h-screen p-10 pt-32">
-        <div class="max-w-5xl mx-auto">
-            <header class="flex justify-between items-center mb-20">
+    <section id="view-schedule" class="hidden min-h-screen p-10 flex items-center justify-center">
+        <div class="w-full max-w-4xl text-center fade-in">
+            <h2 class="text-6xl font-black tracking-tighter mb-4 italic">Set Your <span class="text-blue-600">Sync.</span></h2>
+            <p class="text-gray-400 font-bold mb-16 uppercase tracking-widest">Select your 3 Hour 30 Minute Daily Clinical Slot</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 text-left mb-16">
+                <div class="space-y-4">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Start Date</label>
+                    <input type="date" id="start-date" class="glass-input">
+                </div>
+                <div class="space-y-4">
+                    <label class="text-[10px] font-black uppercase text-gray-400 ml-2">Choose Timing Slot</label>
+                    <div class="grid grid-cols-1 gap-3">
+                        <div onclick="setSlot(this)" class="time-chip">Morning: 05:00 AM - 08:30 AM</div>
+                        <div onclick="setSlot(this)" class="time-chip">Prime: 09:00 AM - 12:30 PM</div>
+                        <div onclick="setSlot(this)" class="time-chip">Afternoon: 02:00 PM - 05:30 PM</div>
+                        <div onclick="setSlot(this)" class="time-chip">Night: 07:00 PM - 10:30 PM</div>
+                    </div>
+                </div>
+            </div>
+            <button onclick="nav('command')" class="btn-primary">FINALIZE COMMAND CENTER</button>
+        </div>
+    </section>
+
+    <section id="view-command" class="hidden min-h-screen p-20 pt-40">
+        <div class="max-w-6xl mx-auto">
+            <header class="flex justify-between items-end mb-20 border-b border-gray-100 pb-10">
                 <div>
-                    <p class="text-blue-600 font-black text-xs tracking-widest uppercase mb-2">Current Active Session</p>
-                    <h2 id="display-slot" class="text-2xl font-black">---</h2>
+                    <p class="text-blue-600 font-black text-xs tracking-widest uppercase mb-2">Academic Command Center</p>
+                    <h2 class="text-4xl font-black">Candidate: <span id="display-name" class="italic">Reyansh</span></h2>
                 </div>
                 <div class="text-right">
-                    <p class="text-gray-400 text-xs font-black uppercase">Batch ID</p>
-                    <p class="font-bold">TITAN-2026-ALPHA</p>
+                    <p id="display-slot" class="text-xl font-bold bg-black text-white px-6 py-2 rounded-full">09:00 AM - 12:30 PM</p>
                 </div>
             </header>
 
-            <div class="bg-black text-white p-20 rounded-[4rem] relative overflow-hidden">
-                <div class="relative z-10">
-                    <div class="inline-block px-4 py-1 bg-blue-600 rounded-full text-[10px] font-black uppercase mb-8">Mandatory Learning</div>
-                    <h4 class="text-white/40 text-xl font-medium mb-2">Today's Subject: <span id="subject-name" class="text-white font-bold">---</span></h4>
-                    <h3 id="chapter-name" class="text-7xl font-black italic tracking-tighter mb-12 leading-none">---</h3>
-                    
-                    <div class="flex gap-10 border-t border-white/10 pt-10">
-                        <div>
-                            <p class="text-[10px] font-black text-white/30 uppercase tracking-widest mb-2">Session Timer</p>
-                            <p class="text-3xl font-black">03h 30m 00s</p>
-                        </div>
-                        <div>
-                            <p class="text-[10px] font-black text-white/30 uppercase tracking-widest mb-2">Study Status</p>
-                            <p class="text-3xl font-black text-blue-500 italic">ACTIVE</p>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                <div class="lg:col-span-2 bg-[#050505] text-white p-20 rounded-[4rem] relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="inline-block px-4 py-1 bg-blue-600 rounded-full text-[10px] font-black uppercase mb-10">Today's Mandate</span>
+                        <h4 class="text-white/40 text-2xl font-medium mb-4">Subject: <span id="subject-name" class="text-white font-bold">Biology</span></h4>
+                        <h3 id="chapter-name" class="text-7xl font-black italic tracking-tighter leading-none mb-16">Human Reproduction</h3>
+                        <div class="flex gap-10">
+                            <div>
+                                <p class="text-[10px] font-black text-white/30 uppercase mb-2">Duration</p>
+                                <p class="text-3xl font-black">03:30:00</p>
+                            </div>
+                            <div class="ml-10">
+                                <p class="text-[10px] font-black text-white/30 uppercase mb-2">Status</p>
+                                <p class="text-3xl font-black text-green-500">SYNCHRONIZED</p>
+                            </div>
                         </div>
                     </div>
+                    <i class="fas fa-microscope absolute -bottom-10 -right-10 text-[20rem] text-white/5"></i>
                 </div>
-                <i class="fas fa-stethoscope absolute -bottom-10 -right-10 text-[20rem] text-white/5 rotate-12"></i>
+
+                <div class="space-y-6">
+                    <div class="p-10 border border-gray-100 rounded-[3rem] bg-gray-50 text-center">
+                        <div class="text-5xl font-black mb-2">01</div>
+                        <p class="text-xs font-black uppercase text-gray-400 tracking-widest">Current Streak</p>
+                    </div>
+                    <div class="p-10 border border-gray-100 rounded-[3rem] text-center">
+                        <i class="fas fa-medal text-4xl text-blue-600 mb-4"></i>
+                        <p class="text-xs font-black uppercase tracking-widest">Phase 1 Rank</p>
+                        <p class="text-xl font-bold mt-2">Novice Associate</p>
+                    </div>
+                </div>
             </div>
 
             <div class="mt-20 text-center">
-                <p class="text-gray-400 font-bold mb-8 italic">"Have you completed the 10-page NCERT Dissection for this chapter?"</p>
-                <button onclick="initiateTest()" class="btn-command">INITIALIZE PROFICIENCY SHIELD</button>
+                <p class="text-gray-400 font-bold mb-10 text-xl italic">"Session in progress. Have you completed your 10-page study?"</p>
+                <button onclick="alert('Proceeding to Proficiency Shield...')" class="btn-primary">INITIATE PROFICIENCY TEST</button>
             </div>
         </div>
     </section>
 
     <script>
-        let scheduleState = {
-            startDate: '',
-            timeSlot: '',
-            chapters: {
-                Physics: ["Units & Measurement", "Motion in a Straight Line", "Motion in a Plane", "Laws of Motion", "Work, Energy & Power", "System of Particles", "Gravitation", "Mechanical Properties of Solids", "Fluids", "Thermal Properties", "Thermodynamics", "Kinetic Theory", "Oscillations", "Waves", "Electrostatics", "Current Electricity", "Magnetism", "EMI", "Alternating Current", "Ray Optics"],
-                Chemistry: ["Some Basic Concepts", "Structure of Atom", "Classification of Elements", "Chemical Bonding", "States of Matter", "Thermodynamics", "Equilibrium", "Redox Reactions", "Hydrogen", "s-Block Elements", "p-Block Elements", "Organic Chemistry Basic", "Hydrocarbons", "Solid State", "Solutions", "Electrochemistry", "Chemical Kinetics", "Surface Chemistry", "Inorganic Trends", "Biomolecules"],
-                Biology: ["The Living World", "Biological Classification", "Plant Kingdom", "Animal Kingdom", "Morphology of Flowering Plants", "Anatomy of Flowering Plants", "Structural Organisation", "Cell: Unit of Life", "Biomolecules", "Cell Cycle", "Transport in Plants", "Mineral Nutrition", "Photosynthesis", "Respiration", "Plant Growth", "Digestion", "Breathing", "Body Fluids", "Excretion", "Locomotion"]
-            }
-        };
-
-        function setSlot(btn, slot) {
-            document.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            scheduleState.timeSlot = slot;
-        }
-
-        function confirmSetup() {
-            scheduleState.startDate = document.getElementById('start-date').value;
-            if(!scheduleState.startDate || !scheduleState.timeSlot) {
-                alert("Clinical Warning: Select both Date and 3h 30m Time Slot.");
-                return;
-            }
-            
-            document.getElementById('display-slot').innerText = scheduleState.timeSlot;
-            calculateTodayChapter();
-            nav('command-view');
-        }
-
-        function calculateTodayChapter() {
-            const days = ["Sunday (Holiday)", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-            const todayIndex = new Date().getDay();
-            const todayName = days[todayIndex];
-
-            let sub = "";
-            let ch = "";
-
-            if(todayIndex === 0) {
-                sub = "REST";
-                ch = "Mandatory Sunday Holiday";
-                document.getElementById('chapter-name').classList.add('text-blue-500');
-            } else if (todayIndex === 1 || todayIndex === 4) {
-                sub = "Physics";
-                ch = scheduleState.chapters.Physics[Math.floor(Math.random() * 20)]; // Logic to increment based on date difference
-            } else if (todayIndex === 2 || todayIndex === 5) {
-                sub = "Chemistry";
-                ch = scheduleState.chapters.Chemistry[Math.floor(Math.random() * 20)];
-            } else {
-                sub = "Biology";
-                ch = scheduleState.chapters.Biology[Math.floor(Math.random() * 20)];
-            }
-
-            document.getElementById('subject-name').innerText = sub;
-            document.getElementById('chapter-name').innerText = ch;
-        }
+        let userData = { name: '', slot: '', date: '' };
 
         function nav(id) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
+            document.getElementById('view-' + id).classList.remove('hidden');
+            window.scrollTo(0,0);
         }
 
-        function initiateTest() {
-            alert("Locking Browser Environment... Loading 15 MCQ Proficiency Shield.");
-            // Link to the Test logic we built previously
+        function sendOTP() {
+            document.getElementById('otp-area').classList.remove('hidden');
+            alert("TITAN OTP: 202628");
         }
+
+        function validateReg() {
+            const name = document.getElementById('user-name').value;
+            const terms = document.getElementById('terms').checked;
+            if(!name || !terms) {
+                alert("Clinical Warning: Name and Terms Acceptance required.");
+                return;
+            }
+            userData.name = name;
+            nav('schedule');
+        }
+
+        function setSlot(el) {
+            document.querySelectorAll('.time-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            userData.slot = el.innerText;
+        }
+
+        function finalizeSchedule() {
+            userData.date = document.getElementById('start-date').value;
+            if(!userData.date || !userData.slot) {
+                alert("Select Commencement Date and Timing Slot.");
+                return;
+            }
+            document.getElementById('display-name').innerText = userData.name;
+            document.getElementById('display-slot').innerText = userData.slot;
+            calculateChapter();
+            nav('command');
+        }
+
+        function calculateChapter() {
+            const day = new Date().getDay();
+            const subs = ["Holiday", "Physics", "Chemistry", "Biology", "Physics", "Chemistry", "Biology"];
+            const chapters = {
+                Physics: "Units & Measurement",
+                Chemistry: "Some Basic Concepts",
+                Biology: "The Living World"
+            };
+            
+            const currentSub = subs[day];
+            document.getElementById('subject-name').innerText = currentSub;
+            document.getElementById('chapter-name').innerText = (day === 0) ? "Mandatory Rest Day" : chapters[currentSub];
+        }
+
+        // Fix for scheduling button
+        document.querySelector('#view-schedule button').onclick = finalizeSchedule;
     </script>
 </body>
 </html>
