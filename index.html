@@ -3,314 +3,333 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC 2026-2028 | Mission MBBS Professional</title>
-    
+    <title>BIPC 2026-2028 | Professional Academic Engine</title>
     <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcfcfd; }
-        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.3); }
-        .locked-phase { filter: grayscale(1); opacity: 0.5; pointer-events: none; position: relative; }
-        .locked-phase::after { content: 'Locked until 2027/2028'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: black; color: white; padding: 5px 10px; border-radius: 5px; font-size: 10px; z-index: 20; }
-        .correct-opt { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #15803d; }
-        .wrong-opt { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #b91c1c; }
-        #portal-ui { display: none; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
+        .hidden { display: none; }
+        .locked { filter: grayscale(1); opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
+        .neobrutalism { border: 3px solid #000; box-shadow: 5px 5px 0px #000; }
+        .correct-opt { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
+        .wrong-opt { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
     </style>
 </head>
 <body class="text-slate-900">
 
-    <div id="auth-overlay" class="fixed inset-0 z-[1000] bg-slate-950 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-10 shadow-2xl overflow-hidden relative">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+    <div id="auth-screen" class="fixed inset-0 z-[1000] bg-slate-950 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-[3rem] p-10 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
             <div class="text-center mb-10">
-                <h1 class="text-3xl font-extrabold tracking-tight italic">BIPC <span class="text-blue-600">2026-2028</span></h1>
-                <p class="text-slate-500 text-sm mt-2 font-medium">Professional Career Pathway Enrollment</p>
+                <h1 class="text-4xl font-extrabold tracking-tighter">BIPC <span class="text-blue-600">MISSION</span></h1>
+                <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Class of 2026-2028</p>
             </div>
-            <form id="regForm" class="space-y-5">
-                <input type="text" id="stu_name" placeholder="Enter Full Name" required class="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
-                <input type="email" placeholder="Email Address" required class="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
-                <input type="password" placeholder="Create Secure Password" required class="w-full px-6 py-4 rounded-2xl border border-slate-100 bg-slate-50 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all">
-                
-                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100">
+            <form onsubmit="event.preventDefault(); login();" class="space-y-5">
+                <input type="text" id="stu-name" placeholder="Full Name" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
+                <input type="email" placeholder="Email Address" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
+                <input type="password" placeholder="Create Access Key" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
                     <div class="flex items-start gap-3">
-                        <input type="checkbox" id="terms" required class="mt-1 w-5 h-5 accent-blue-600">
-                        <label for="terms" class="text-xs text-slate-500 leading-relaxed font-medium">
-                            I accept the 2-Year Battle Plan (2026-2028). I promise to complete 2 hours of daily study before taking any mock tests.
-                        </label>
+                        <input type="checkbox" required class="mt-1 w-5 h-5 accent-blue-600">
+                        <label class="text-xs text-slate-500 font-medium">I accept the 2-Year Battle Plan. I understand that I must teach myself and pass tests to proceed.</label>
                     </div>
                 </div>
-
-                <button type="submit" class="w-full py-5 bg-slate-900 text-white font-extrabold rounded-2xl hover:bg-blue-600 hover:shadow-2xl hover:shadow-blue-500/30 transition-all active:scale-95">
-                    START THE MISSION
-                </button>
+                <button class="w-full py-5 bg-slate-900 text-white font-black rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-blue-200">INITIALIZE SESSION</button>
             </form>
         </div>
     </div>
 
-    <div id="portal-ui">
-        <nav class="fixed top-0 w-full z-50 glass border-b border-slate-100">
+    <div id="app" class="hidden">
+        <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200">
             <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
                 <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-bold">B</div>
-                    <span class="font-bold text-xl uppercase tracking-tighter">BIPC <span class="text-blue-600">Mission</span></span>
+                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black">B</div>
+                    <span class="font-black text-xl tracking-tighter uppercase">BIPC <span class="text-blue-600">Pro</span></span>
                 </div>
-                <div class="flex items-center gap-4">
-                    <div class="hidden md:block text-right">
-                        <p id="user_welcome" class="text-sm font-bold text-slate-800">Student</p>
-                        <p class="text-[10px] font-bold text-blue-600 uppercase">Phase 1: Foundation (2026)</p>
+                <div class="flex items-center gap-6">
+                    <div class="text-right hidden md:block">
+                        <p id="nav-user" class="text-sm font-black">Student Name</p>
+                        <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest">Phase 1: Active</p>
                     </div>
-                    <div class="h-10 w-10 rounded-full bg-slate-200 border-2 border-white shadow-sm flex items-center justify-center"><i class="fas fa-user-md text-slate-600"></i></div>
+                    <button onclick="logout()" class="text-slate-400 hover:text-red-500 transition-colors"><i class="fas fa-sign-out-alt text-xl"></i></button>
                 </div>
             </div>
         </nav>
 
         <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
             
-            <div class="grid lg:grid-cols-3 gap-8 mb-12">
-                <div class="lg:col-span-2 bg-white rounded-[3rem] p-10 border border-slate-100 shadow-sm relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-8">
-                        <i class="fas fa-calendar-check text-slate-100 text-8xl"></i>
+            <div id="dashboard">
+                <div class="grid lg:grid-cols-3 gap-8 mb-12">
+                    <div class="lg:col-span-2 bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-black mb-2">Phase 1: 2026 Foundation</h2>
+                            <p class="text-slate-500 font-medium mb-8 italic">"The foundation for MBBS begins here."</p>
+                            
+                            <div class="grid md:grid-cols-3 gap-6">
+                                <button onclick="selectSub('Physics')" class="p-8 bg-blue-50 border-2 border-blue-100 rounded-[2.5rem] text-center hover:bg-blue-600 hover:text-white transition-all group">
+                                    <i class="fas fa-bolt text-3xl mb-4 text-blue-600 group-hover:text-white"></i>
+                                    <h4 class="font-black uppercase tracking-widest text-xs">Physics</h4>
+                                </button>
+                                <button onclick="selectSub('Chemistry')" class="p-8 bg-purple-50 border-2 border-purple-100 rounded-[2.5rem] text-center hover:bg-purple-600 hover:text-white transition-all group">
+                                    <i class="fas fa-flask text-3xl mb-4 text-purple-600 group-hover:text-white"></i>
+                                    <h4 class="font-black uppercase tracking-widest text-xs">Chemistry</h4>
+                                </button>
+                                <button onclick="selectSub('Biology')" class="p-8 bg-green-50 border-2 border-green-100 rounded-[2.5rem] text-center hover:bg-green-600 hover:text-white transition-all group">
+                                    <i class="fas fa-dna text-3xl mb-4 text-green-600 group-hover:text-white"></i>
+                                    <h4 class="font-black uppercase tracking-widest text-xs">Biology</h4>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="relative z-10">
-                        <h2 class="text-3xl font-extrabold mb-2">Today's Protocol</h2>
-                        <p class="text-slate-400 font-medium mb-8">Daily Target: 2 Hours Learning | Subject: Chemistry</p>
-                        
-                        <div class="grid md:grid-cols-2 gap-4 mb-8">
-                            <div class="p-6 bg-blue-50 rounded-3xl border border-blue-100">
-                                <p class="text-[10px] font-bold text-blue-600 uppercase mb-2">Morning Session</p>
-                                <h4 class="font-bold text-blue-900 leading-tight text-lg">Structure of Atom: Bohr's Model & Quantum Numbers</h4>
-                            </div>
-                            <div class="p-6 bg-purple-50 rounded-3xl border border-purple-100">
-                                <p class="text-[10px] font-bold text-purple-600 uppercase mb-2">Strategy</p>
-                                <h4 class="font-bold text-purple-900 leading-tight text-lg">Read NCERT Theory + Practice 15 Numerical Problems</h4>
-                            </div>
-                        </div>
 
-                        <div class="space-y-4">
-                            <h5 class="font-bold text-sm">Study Log Verification:</h5>
-                            <textarea id="study_entry" placeholder="Log your 2-hour study summary here to unlock the Daily Battle..." class="w-full p-6 bg-slate-50 border border-slate-100 rounded-[2rem] h-28 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"></textarea>
-                            <button onclick="unlockTest()" class="w-full md:w-auto px-10 py-5 bg-blue-600 text-white font-extrabold rounded-2xl hover:shadow-2xl hover:shadow-blue-500/30 transition-all active:scale-95 flex items-center justify-center gap-3">
-                                <i class="fas fa-lock-open"></i> UNLOCK MOCK BATTLE
-                            </button>
+                    <div class="bg-slate-900 rounded-[3.5rem] p-10 text-white flex flex-col justify-center text-center shadow-2xl">
+                        <h4 class="text-blue-400 font-black text-xs uppercase tracking-[0.3em] mb-6">NEET 2026 Countdown</h4>
+                        <div class="grid grid-cols-3 gap-4 mb-8">
+                            <div><span id="d_days" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Days</p></div>
+                            <div><span id="d_hrs" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Hours</p></div>
+                            <div><span id="d_mins" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Mins</p></div>
                         </div>
+                        <p class="text-[10px] italic opacity-60">"Don't stop when you're tired, stop when you're finished."</p>
                     </div>
                 </div>
 
-                <div class="bg-slate-950 rounded-[3rem] p-10 text-white flex flex-col justify-between relative overflow-hidden">
-                    <div class="absolute top-[-20px] left-[-20px] w-40 h-40 bg-blue-600/20 blur-[80px]"></div>
-                    <div class="relative z-10">
-                        <p class="text-blue-500 font-bold text-xs tracking-widest uppercase mb-8">Mission NEET 2026</p>
-                        <div class="grid grid-cols-3 gap-2 text-center mb-10">
-                            <div><span id="d_days" class="text-4xl font-extrabold block">00</span><p class="text-[9px] uppercase opacity-40 mt-1">Days</p></div>
-                            <div><span id="d_hrs" class="text-4xl font-extrabold block">00</span><p class="text-[9px] uppercase opacity-40 mt-1">Hours</p></div>
-                            <div><span id="d_mins" class="text-4xl font-extrabold block">00</span><p class="text-[9px] uppercase opacity-40 mt-1">Mins</p></div>
+                <div id="syllabus-view" class="hidden">
+                    <h3 id="subject-title" class="text-2xl font-black mb-8 flex items-center gap-3"></h3>
+                    <div class="space-y-4">
+                        <div id="chapter-1" class="bg-white p-8 rounded-3xl border-2 border-blue-600 flex justify-between items-center group transition-all hover:bg-slate-50">
+                            <div class="flex gap-6 items-center">
+                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-black">01</div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-slate-800">Introduction & Basic Concepts</h4>
+                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Status: Open Session</p>
+                                </div>
+                            </div>
+                            <button onclick="startClass(1)" class="bg-slate-900 text-white px-8 py-3 rounded-2xl font-black hover:bg-blue-600 transition-all">START TEACHING</button>
                         </div>
-                        <div class="p-6 bg-white/5 rounded-3xl border border-white/10">
-                            <p class="text-[10px] font-bold text-blue-400 mb-2 uppercase">Status Update</p>
-                            <p class="text-sm font-medium leading-relaxed">Phase 1: Foundation building for 11th Grade concepts is currently IN PROGRESS.</p>
+                        <div id="chapter-2" class="locked bg-white p-8 rounded-3xl border border-slate-100 flex justify-between items-center">
+                            <div class="flex gap-6 items-center">
+                                <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center font-black">02</div>
+                                <div>
+                                    <h4 class="text-xl font-bold text-slate-400">Advanced Dynamics & Laws</h4>
+                                    <p class="text-xs text-slate-300 font-bold uppercase tracking-widest mt-1">Status: Locked</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-lock text-slate-200 text-2xl"></i>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="mb-20">
-                <h3 class="text-2xl font-extrabold mb-8 flex items-center gap-3"><i class="fas fa-layer-group text-blue-600"></i> Battle Phases 2026-2028</h3>
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="p-8 bg-white border-2 border-blue-600 rounded-[2.5rem] shadow-xl relative">
-                        <div class="w-12 h-12 bg-blue-600 text-white rounded-2xl flex items-center justify-center font-black mb-6">01</div>
-                        <h4 class="text-xl font-extrabold mb-2 italic text-slate-900">Foundation (11th)</h4>
-                        <p class="text-sm text-slate-500 font-medium leading-relaxed">Mastering NCERT 11th Biology, Kinematics, Thermodynamics & Organic Basics. (2026 Batch)</p>
+            <div id="classroom" class="hidden max-w-4xl mx-auto bg-white rounded-[4rem] p-12 md:p-20 shadow-2xl border-t-[12px] border-blue-600 relative">
+                <button onclick="exitClass()" class="absolute top-10 right-10 text-slate-300 hover:text-red-500"><i class="fas fa-times-circle text-3xl"></i></button>
+                
+                <div id="lecture-content" class="prose lg:prose-xl">
+                    <span class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs font-black mb-6 inline-block">SESSION 01: THE FOUNDATION</span>
+                    <h1 class="text-5xl font-black leading-tight mb-8">Units, Dimensions & Real-life Physics</h1>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-10">Physics is the study of how the universe behaves. In your NEET preparation, <strong>Accuracy</strong> is your best friend. Every measurement requires a unit—imagine a doctor prescribing "5 medicine." 5 grams? 5 ml? 5 tablets? Units save lives!</p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8 mb-12">
+                        <div class="bg-blue-50 p-8 rounded-[2.5rem] border-l-8 border-blue-600">
+                            <h4 class="font-black text-blue-900 mb-4 uppercase text-sm tracking-widest">Core Lesson</h4>
+                            <p class="text-sm text-blue-800 font-medium">Dimensional analysis helps us verify if an equation is correct. For example, Force = Mass × Acceleration. $[M] \times [LT^{-2}] = [MLT^{-2}]$.</p>
+                        </div>
+                        <div class="bg-orange-50 p-8 rounded-[2.5rem] border-l-8 border-orange-600">
+                            <h4 class="font-black text-orange-900 mb-4 uppercase text-sm tracking-widest">Real Life Application</h4>
+                            <p class="text-sm text-orange-800 font-medium">Satellites use precise dimensional calculations to stay in orbit. A small error in a unit conversion once crashed a $125 million Mars orbiter!</p>
+                        </div>
                     </div>
-                    <div id="ph2" class="locked-phase p-8 bg-white border border-slate-100 rounded-[2.5rem]">
-                        <div class="w-12 h-12 bg-slate-200 text-slate-500 rounded-2xl flex items-center justify-center font-black mb-6">02</div>
-                        <h4 class="text-xl font-extrabold mb-2 text-slate-400 italic">Advanced (12th)</h4>
-                        <p class="text-sm text-slate-300 font-medium leading-relaxed">Genetics, Electrodynamics, and Rapid Reaction Mechanisms. Focus on speed. (2027 Batch)</p>
-                    </div>
-                    <div id="ph3" class="locked-phase p-8 bg-white border border-slate-100 rounded-[2.5rem]">
-                        <div class="w-12 h-12 bg-slate-200 text-slate-500 rounded-2xl flex items-center justify-center font-black mb-6">03</div>
-                        <h4 class="text-xl font-extrabold mb-2 text-slate-400 italic">The Victory Lap</h4>
-                        <p class="text-sm text-slate-300 font-medium leading-relaxed">Full Syllabus Mock Series, Last 20 Years PYQs, and Rank Optimization. (2028 Batch)</p>
-                    </div>
+                </div>
+
+                <div class="mt-20 border-t pt-10">
+                    <h3 class="text-2xl font-black mb-4">Brief Your Session</h3>
+                    <p class="text-sm text-slate-400 mb-4 italic">Teacher Reyansh: "Now, explain in your own words what you learned today. Be detailed."</p>
+                    <textarea id="brief-log" placeholder="Write your summary here... (Min 30 characters)" class="w-full p-8 bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] h-40 focus:border-blue-500 outline-none transition-all"></textarea>
+                    
+                    <button onclick="unlockTest()" class="w-full py-6 bg-blue-600 text-white font-black rounded-3xl mt-8 shadow-2xl shadow-blue-200 hover:scale-[1.02] active:scale-[0.98] transition-all">TAKE THE PROFICIENCY TEST</button>
                 </div>
             </div>
 
-            <section id="mockEngine" class="hidden py-16 bg-white border border-slate-100 rounded-[4rem] px-8 md:px-20 shadow-2xl scroll-mt-32">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-10">
-                    <div class="text-center md:text-left">
-                        <h2 class="text-4xl font-extrabold tracking-tight mb-2">NEET Battle Ground</h2>
-                        <p class="text-slate-400 font-bold text-sm">RULE: <span class="text-green-600">+4 Points</span> | <span class="text-red-600">-1 Negative</span></p>
-                    </div>
-                    <div class="bg-red-50 p-6 px-10 rounded-[2rem] border-2 border-red-100 text-center">
-                        <p class="text-[10px] font-black text-red-600 uppercase tracking-widest mb-1">Time Remaining</p>
-                        <span id="testTimer" class="text-4xl font-mono font-bold text-red-600">45:00</span>
-                    </div>
+            <div id="test-zone" class="hidden max-w-3xl mx-auto bg-white rounded-[4rem] p-12 md:p-16 shadow-2xl border-4 border-slate-900 neobrutalism">
+                <div class="flex justify-between items-center mb-12">
+                    <h2 class="text-3xl font-black">Chapter 01 Test</h2>
+                    <div class="text-xl font-mono font-black text-red-600 bg-red-50 px-6 py-2 rounded-full">45:00</div>
                 </div>
 
-                <div id="questions" class="space-y-16">
-                    <div class="q-item">
-                        <div class="flex gap-6 mb-8">
-                            <span class="flex-shrink-0 w-12 h-12 bg-slate-900 text-white rounded-2xl flex items-center justify-center font-black shadow-lg">01</span>
-                            <p class="text-2xl font-bold text-slate-800 leading-snug">The process of development of more than one embryo in a seed is known as:</p>
+                <div id="quiz-container" class="space-y-12">
+                    <div class="q-block">
+                        <p class="text-xl font-bold mb-8">1. Which of the following quantities has the same dimensions as that of Energy?</p>
+                        <div class="grid gap-4">
+                            <button onclick="checkAns(this, false, 'Power is Energy/Time, so dimensions differ.')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">A. Power</button>
+                            <button onclick="checkAns(this, true, 'Both Work and Energy have the dimensional formula [ML²T⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">B. Work</button>
+                            <button onclick="checkAns(this, false, 'Force is [MLT⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">C. Force</button>
+                            <button onclick="checkAns(this, false, 'Pressure is [ML⁻¹T⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">D. Pressure</button>
                         </div>
-                        <div class="grid md:grid-cols-2 gap-4 ml-0 md:ml-16">
-                            <button onclick="pick(this, false, 'Parthenocarpy is fruit development without fertilization.')" class="opt-btn p-6 border-2 border-slate-100 rounded-[1.5rem] text-left hover:border-blue-600 transition-all font-bold">A. Parthenocarpy</button>
-                            <button onclick="pick(this, true, 'Polyembryony is the occurrence of more than one embryo in a seed.')" class="opt-btn p-6 border-2 border-slate-100 rounded-[1.5rem] text-left hover:border-blue-600 transition-all font-bold">B. Polyembryony</button>
-                            <button onclick="pick(this, false, 'Apomixis is asexual seed production.')" class="opt-btn p-6 border-2 border-slate-100 rounded-[1.5rem] text-left hover:border-blue-600 transition-all font-bold">C. Apomixis</button>
-                            <button onclick="pick(this, false, 'Polyteny refers to oversized chromosomes.')" class="opt-btn p-6 border-2 border-slate-100 rounded-[1.5rem] text-left hover:border-blue-600 transition-all font-bold">D. Polyteny</button>
-                        </div>
-                        <div class="hint-box hidden mt-8 ml-0 md:ml-16 p-6 bg-blue-50 border-l-8 border-blue-600 rounded-r-3xl text-blue-900 font-medium"></div>
+                        <div class="exp hidden mt-6 p-6 bg-blue-50 border-l-8 border-blue-600 rounded-r-3xl text-blue-900 italic font-medium"></div>
                     </div>
                 </div>
 
-                <div class="mt-20 pt-10 border-t border-slate-100 text-center">
-                    <button onclick="finish()" class="bg-slate-950 text-white px-16 py-6 rounded-3xl font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-2xl">SUBMIT BATTLE SHEET</button>
-                    <div id="finalScore" class="hidden mt-12 animate-bounce">
-                        <h3 class="text-6xl font-black text-blue-600" id="scoreVal">0</h3>
-                        <p id="motivate" class="text-slate-500 font-bold mt-2 text-xl"></p>
-                    </div>
+                <div id="test-results" class="hidden mt-16 pt-10 border-t text-center">
+                    <h3 id="score-text" class="text-5xl font-black mb-4">Score: 0%</h3>
+                    <p id="feedback-text" class="text-slate-500 font-bold mb-8">You need 50% to pass.</p>
+                    <button id="next-btn" class="hidden bg-slate-900 text-white px-12 py-5 rounded-3xl font-black hover:bg-green-600 transition-all">UNLOCK CHAPTER 02</button>
+                    <button id="retry-btn" class="hidden bg-red-600 text-white px-12 py-5 rounded-3xl font-black">RE-WATCH CLASS (REVISION)</button>
                 </div>
-            </section>
+            </div>
 
-            <section class="mt-20 bg-gradient-to-br from-indigo-900 to-slate-950 rounded-[4rem] p-10 md:p-16 text-white relative overflow-hidden shadow-2xl">
-                <div class="absolute bottom-0 right-0 p-10 opacity-10">
-                    <i class="fas fa-brain text-[15rem]"></i>
-                </div>
-                <div class="relative z-10 max-w-2xl">
-                    <h2 class="text-4xl font-extrabold mb-6 italic">NEET Solver AI</h2>
-                    <p class="text-indigo-200 font-medium mb-8">Stuck on a Physics numerical or a Chemistry mechanism? Type it below and let the solver break it down.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <input type="text" id="aiQ" placeholder="Explain the Mechanism of Muscle Contraction..." class="flex-1 p-6 bg-white/10 border border-white/20 rounded-3xl outline-none focus:bg-white/20 transition-all font-medium placeholder:text-white/40">
-                        <button onclick="askAI()" class="bg-white text-indigo-900 px-10 py-6 rounded-3xl font-black hover:bg-indigo-50 transition-all">SOLVE</button>
+            <div id="debrief-zone" class="hidden max-w-2xl mx-auto bg-slate-950 text-white p-12 rounded-[4rem] shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 blur-[80px] opacity-20"></div>
+                <h2 class="text-3xl font-black mb-8 text-blue-400">Final Deep-Briefing</h2>
+                <div class="space-y-8 relative z-10">
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Nutrition Check: What did you eat?</label>
+                        <input type="text" id="diet" placeholder="e.g. Oats, Fruit, Milk..." class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500">
                     </div>
-                    <div id="aiRes" class="mt-10 p-8 bg-white/5 border border-white/10 rounded-[2rem] hidden leading-relaxed text-indigo-50 italic text-sm"></div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Rest & Recover: Sleep hours?</label>
+                        <input type="text" id="rest" placeholder="e.g. 7 Hours" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Daily Analysis: What was tough today?</label>
+                        <textarea id="struggle" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl h-32 outline-none focus:border-blue-500"></textarea>
+                    </div>
+                    <button onclick="finishDay()" class="w-full py-5 bg-blue-600 text-white font-black rounded-3xl shadow-xl hover:bg-blue-400 transition-all">SAVE PERFORMANCE LOG & LOGOUT</button>
                 </div>
-            </section>
-
-            <section class="mt-20 py-10">
-                <h3 class="text-2xl font-extrabold mb-8">Career Readiness Tracker</h3>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <div class="p-6 bg-white border rounded-3xl text-center"><i class="fas fa-user-md text-blue-600 text-2xl mb-4"></i><p class="font-bold text-sm">MBBS / NEET</p></div>
-                    <div class="p-6 bg-white border rounded-3xl text-center"><i class="fas fa-pills text-purple-600 text-2xl mb-4"></i><p class="font-bold text-sm">B-Pharmacy</p></div>
-                    <div class="p-6 bg-white border rounded-3xl text-center"><i class="fas fa-seedling text-green-600 text-2xl mb-4"></i><p class="font-bold text-sm">Agri B.Sc</p></div>
-                    <div class="p-6 bg-white border rounded-3xl text-center"><i class="fas fa-microscope text-red-600 text-2xl mb-4"></i><p class="font-bold text-sm">Biotech Research</p></div>
-                </div>
-            </section>
+            </div>
 
         </main>
 
-        <footer class="py-20 border-t border-slate-100 text-center">
-            <p class="text-slate-400 font-medium uppercase tracking-widest text-xs">BIPC Project Batch 2026-2028</p>
-            <h5 class="text-lg font-black text-slate-800 mt-2">Strategically Engineered by <span class="text-blue-600 underline">Reyansh</span></h5>
+        <footer class="py-20 text-center border-t border-slate-100">
+            <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Strategic Academic Engineering</p>
+            <h5 class="text-lg font-black text-slate-800 mt-2">Developed for Excellence by <span class="text-blue-600 underline">Reyansh</span></h5>
             <div class="mt-8 flex justify-center gap-6 text-slate-300">
-                <i class="fab fa-instagram hover:text-blue-600 transition-colors"></i>
-                <i class="fab fa-whatsapp hover:text-blue-600 transition-colors"></i>
-                <i class="fab fa-youtube hover:text-blue-600 transition-colors"></i>
+                <i class="fab fa-instagram hover:text-blue-600 cursor-pointer"></i>
+                <i class="fab fa-whatsapp hover:text-blue-600 cursor-pointer"></i>
+                <i class="fab fa-youtube hover:text-blue-600 cursor-pointer"></i>
             </div>
         </footer>
     </div>
 
+    <div id="ai-widget" class="fixed bottom-10 right-10 z-[100] hidden">
+        <button onclick="toggleAI()" class="w-16 h-16 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl animate-bounce"><i class="fas fa-brain"></i></button>
+        <div id="ai-box" class="hidden absolute bottom-20 right-0 w-80 bg-white border-2 border-slate-900 rounded-3xl p-6 shadow-2xl neobrutalism">
+            <h4 class="font-black text-sm mb-4">NEET Solver AI</h4>
+            <input type="text" id="ai-q" placeholder="Ask a question..." class="w-full p-3 bg-slate-50 border rounded-xl text-xs mb-4">
+            <button onclick="askAI()" class="w-full py-2 bg-slate-900 text-white font-bold rounded-xl text-xs">SOLVE</button>
+            <p id="ai-res" class="mt-4 text-[10px] text-slate-500 italic"></p>
+        </div>
+    </div>
+
     <script>
-        let marks = 0;
-        let testRunning = false;
+        let testScore = 0;
+        let selectedSubject = "";
 
-        // AUTH & DATE GATE
-        const regForm = document.getElementById('regForm');
-        regForm.onsubmit = (e) => {
-            e.preventDefault();
-            const name = document.getElementById('stu_name').value;
-            document.getElementById('auth-overlay').classList.add('hidden');
-            document.getElementById('portal-ui').style.display = 'block';
-            document.getElementById('user_welcome').innerText = name;
+        function login() {
+            const name = document.getElementById('stu-name').value;
+            document.getElementById('auth-screen').classList.add('hidden');
+            document.getElementById('app').classList.remove('hidden');
+            document.getElementById('ai-widget').classList.remove('hidden');
+            document.getElementById('nav-user').innerText = "Future Dr. " + name;
             startCountdown();
-            initPhases();
-        };
-
-        function initPhases() {
-            const year = new Date().getFullYear();
-            if (year >= 2027) {
-                document.getElementById('ph2').classList.remove('locked-phase');
-                document.getElementById('ph2').classList.add('border-purple-600', 'border-2');
-            }
-            if (year >= 2028) {
-                document.getElementById('ph3').classList.remove('locked-phase');
-                document.getElementById('ph3').classList.add('border-red-600', 'border-2');
-            }
         }
 
-        // MOCK TEST LOGIC
+        function logout() { location.reload(); }
+
+        function selectSub(sub) {
+            selectedSubject = sub;
+            document.getElementById('syllabus-view').classList.remove('hidden');
+            document.getElementById('subject-title').innerText = sub + " Master Curriculum";
+            window.scrollTo(0, document.getElementById('syllabus-view').offsetTop - 100);
+        }
+
+        function startClass(ch) {
+            document.getElementById('dashboard').classList.add('hidden');
+            document.getElementById('classroom').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function exitClass() {
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.getElementById('classroom').classList.add('hidden');
+        }
+
         function unlockTest() {
-            const entry = document.getElementById('study_entry').value;
-            if(entry.trim().length < 30) {
-                alert("REYANSH'S SECURITY: Your study log is too brief. Please describe your 2-hour study session to unlock the NEET Battle Ground.");
+            const brief = document.getElementById('brief-log').value;
+            if(brief.trim().length < 30) {
+                alert("REYANSH: You cannot proceed without briefing. Teach back what you learned!");
                 return;
             }
-            const engine = document.getElementById('mockEngine');
-            engine.classList.remove('hidden');
-            engine.scrollIntoView({ behavior: 'smooth' });
-            if(!testRunning) startTimer(45);
+            document.getElementById('classroom').classList.add('hidden');
+            document.getElementById('test-zone').classList.remove('hidden');
+            window.scrollTo(0, 0);
         }
 
-        function pick(btn, isRight, exp) {
-            const btns = btn.parentElement.querySelectorAll('.opt-btn');
-            const hint = btn.parentElement.nextElementSibling;
+        function checkAns(btn, isCorrect, explanation) {
+            const btns = btn.parentElement.querySelectorAll('.opt');
+            const expBox = btn.parentElement.nextElementSibling;
             btns.forEach(b => b.disabled = true);
             
-            if(isRight) {
+            if(isCorrect) {
                 btn.classList.add('correct-opt');
-                marks += 4;
+                testScore = 100;
             } else {
                 btn.classList.add('wrong-opt');
-                marks -= 1;
+                testScore = 0;
             }
-            hint.innerHTML = `<strong>NEET Solver Breakdown:</strong> ${exp}`;
-            hint.classList.remove('hidden');
-        }
-
-        function finish() {
-            const scoreArea = document.getElementById('finalScore');
-            const val = document.getElementById('scoreVal');
-            const mot = document.getElementById('motivate');
             
-            val.innerText = marks;
-            scoreArea.classList.remove('hidden');
-            mot.innerText = marks >= 4 ? "EXCELLENT WORK! YOU ARE ON TRACK FOR MBBS." : "WELL DONE FOR TRYING! CONSISTENCY BEATS TALENT.";
-            window.scrollTo(0, document.body.scrollHeight);
+            expBox.innerHTML = `<strong>NEET Solver Breakdown:</strong> ${explanation}`;
+            expBox.classList.remove('hidden');
+            
+            showResults();
         }
 
-        // TIMER & AI
-        function startTimer(m) {
-            testRunning = true;
-            let s = m * 60;
-            const display = document.getElementById('testTimer');
-            const clock = setInterval(() => {
-                let mins = Math.floor(s / 60);
-                let secs = s % 60;
-                display.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-                if(s <= 0) { clearInterval(clock); finish(); }
-                s--;
-            }, 1000);
+        function showResults() {
+            const res = document.getElementById('test-results');
+            const scoreT = document.getElementById('score-text');
+            const nxt = document.getElementById('next-btn');
+            const rty = document.getElementById('retry-btn');
+            
+            res.classList.remove('hidden');
+            scoreT.innerText = `Score: ${testScore}%`;
+            
+            if(testScore >= 50) {
+                document.getElementById('feedback-text').innerText = "MASTERED! You have passed the proficiency test.";
+                nxt.classList.remove('hidden');
+                nxt.onclick = () => {
+                    document.getElementById('test-zone').classList.add('hidden');
+                    document.getElementById('debrief-zone').classList.remove('hidden');
+                };
+            } else {
+                document.getElementById('feedback-text').innerText = "FAILED! Initiating mandatory revision session.";
+                rty.classList.remove('hidden');
+                rty.onclick = () => { location.reload(); };
+            }
+        }
+
+        function finishDay() {
+            alert("REYASNH AI: Performance log synchronized. Your 2026 Phase 1 stats are updated. Rest well, Doctor!");
+            location.reload();
         }
 
         function startCountdown() {
             const target = new Date("May 3, 2026 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
-                const gap = target - now;
-                document.getElementById('d_days').innerText = Math.floor(gap / (1000*60*60*24));
-                document.getElementById('d_hrs').innerText = Math.floor((gap % (1000*60*60*24)) / (1000*60*60));
-                document.getElementById('d_mins').innerText = Math.floor((gap % (1000*60*60)) / (1000*60));
+                const diff = target - now;
+                document.getElementById('d_days').innerText = Math.floor(diff / (1000*60*60*24));
+                document.getElementById('d_hrs').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                document.getElementById('d_mins').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
             }, 1000);
         }
 
+        function toggleAI() { document.getElementById('ai-box').classList.toggle('hidden'); }
+
         function askAI() {
-            const q = document.getElementById('aiQ').value;
-            const res = document.getElementById('aiRes');
-            res.classList.remove('hidden');
-            res.innerHTML = `<i class="fas fa-spinner fa-spin mr-2"></i> Analyzing ${q} through NEET 2026 patterns... <br><br> <strong>NEET SOLVER:</strong> For the question "${q}", you must focus on NCERT Page 142. This concept relates to the sliding filament theory (if Biology) or basic atomic interactions. Reyansh suggests practicing 5 similar MCQs to master this.`;
+            const q = document.getElementById('ai-q').value;
+            const res = document.getElementById('ai-res');
+            res.innerText = `NEET SOLVER: Analyzing your query about "${q}"... This is a high-priority concept for NEET 2026. Reyansh suggests referencing NCERT Page 12-15 for the specific diagram. Keep pushing!`;
         }
     </script>
 </body>
