@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIPC 2026-2028 | Ultimate Battle Plan</title>
+    
+    <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+        .blur-bg { backdrop-filter: blur(15px); background: rgba(255, 255, 255, 0.8); }
+        #main-content { display: none; } /* Hidden until login */
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <div id="auth-screen" class="fixed inset-0 z-[200] bg-slate-900 flex items-center justify-center p-6">
+        <div class="bg-white w-full max-w-md rounded-[2.5rem] p-8 md:p-10 shadow-2xl">
+            <div class="text-center mb-8">
+                <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl font-bold mx-auto mb-4">B</div>
+                <h1 class="text-2xl font-bold">BIPC 2026-2028</h1>
+                <p class="text-slate-500 text-sm">Please sign in to access the Battle Plan</p>
+            </div>
+            
+            <form id="auth-form" class="space-y-4">
+                <input type="text" id="user-name" placeholder="Full Name" required class="w-full px-5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none">
+                <input type="email" id="user-email" placeholder="Email Address" required class="w-full px-5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none">
+                <input type="password" id="user-pass" placeholder="Create Password" required class="w-full px-5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-blue-500 outline-none">
+                
+                <div class="flex items-center gap-3 py-2">
+                    <input type="checkbox" id="terms" required class="w-5 h-5 accent-blue-600">
+                    <label for="terms" class="text-xs text-slate-500">I accept the terms and conditions for BIPC 2026-28 batch.</label>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition active:scale-95 shadow-lg shadow-blue-200">
+                    Access Portal
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <nav class="fixed top-0 w-full z-[100] blur-bg border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+                <span class="text-xl font-bold text-blue-600">BIPC <span class="text-slate-800">2026-28</span></span>
+                <div class="hidden md:flex gap-8 font-semibold text-sm">
+                    <a href="#battle-plan" class="hover:text-blue-600">Battle Plan</a>
+                    <a href="#quiz-section" class="hover:text-blue-600">Daily Quiz</a>
+                    <a href="#careers" class="hover:text-blue-600">Careers</a>
+                    <span id="display-name" class="text-blue-600 bg-blue-50 px-3 py-1 rounded-lg">Student</span>
+                </div>
+            </div>
+        </nav>
+
+        <header class="pt-32 pb-20 px-6">
+            <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-blue-600 font-bold tracking-widest text-sm uppercase">2026 - 2028 Mission</span>
+                    <h1 class="text-5xl md:text-6xl font-extrabold mt-4 mb-6">Master NEET with the <span class="text-blue-600">Victory Plan.</span></h1>
+                    
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm mb-8">
+                        <h3 class="font-bold flex items-center gap-2 mb-3 text-orange-600">
+                            <i class="fas fa-fire"></i> Daily Study Target
+                        </h3>
+                        <p class="text-slate-600">Physics: Vectors & Kinematics Revision | Biology: Cell Structure Mock Test</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-[3rem] p-10 text-white text-center shadow-2xl relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h4 class="text-blue-400 font-bold uppercase tracking-widest mb-6">NEET 2026 Countdown</h4>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div class="bg-white/10 p-4 rounded-2xl"><span id="days" class="text-4xl font-bold">00</span><p class="text-[10px] uppercase opacity-50 mt-1">Days</p></div>
+                            <div class="bg-white/10 p-4 rounded-2xl"><span id="hours" class="text-4xl font-bold">00</span><p class="text-[10px] uppercase opacity-50 mt-1">Hours</p></div>
+                            <div class="bg-white/10 p-4 rounded-2xl"><span id="mins" class="text-4xl font-bold">00</span><p class="text-[10px] uppercase opacity-50 mt-1">Mins</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="quiz-section" class="py-20 bg-blue-600 text-white">
+            <div class="max-w-3xl mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-10">Daily Battle: Biology Quiz</h2>
+                <div class="bg-white text-slate-900 p-8 md:p-12 rounded-[2.5rem] shadow-2xl text-left">
+                    <div id="quiz-container">
+                        <p class="text-xl font-bold mb-6">Q: Which of the following is known as the "Powerhouse of the Cell"?</p>
+                        <div class="space-y-4">
+                            <button onclick="checkAnswer(this, false)" class="w-full p-4 border-2 border-slate-100 rounded-2xl hover:bg-slate-50 transition text-left font-medium">A. Ribosome</button>
+                            <button onclick="checkAnswer(this, true)" class="w-full p-4 border-2 border-slate-100 rounded-2xl hover:bg-slate-50 transition text-left font-medium">B. Mitochondria</button>
+                            <button onclick="checkAnswer(this, false)" class="w-full p-4 border-2 border-slate-100 rounded-2xl hover:bg-slate-50 transition text-left font-medium">C. Nucleus</button>
+                        </div>
+                        <p id="quiz-feedback" class="mt-6 text-center font-bold hidden"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="battle-plan" class="py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <h2 class="text-3xl font-bold mb-12 text-center">Your 2026-2028 Battle Plan</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                        <div class="text-blue-600 font-bold mb-2">Phase 1 (2026)</div>
+                        <h4 class="text-xl font-bold mb-4 italic">The Foundation</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Complete 100% of NCERT Class 11 Biology and Physics basics. Aim for 350+ in monthly mocks.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                        <div class="text-purple-600 font-bold mb-2">Phase 2 (2027)</div>
+                        <h4 class="text-xl font-bold mb-4 italic">The Deep Dive</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Class 12 syllabus completion by October. Start high-yield Chemistry organic reactions.</p>
+                    </div>
+                    <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                        <div class="text-emerald-600 font-bold mb-2">Phase 3 (2028)</div>
+                        <h4 class="text-xl font-bold mb-4 italic">Victory Lap</h4>
+                        <p class="text-slate-500 text-sm leading-relaxed">Last 3 months: Daily Mock Tests, PYQs (Previous Year Questions), and error mapping.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="py-12 border-t border-slate-200 text-center text-slate-400 text-sm">
+            <p>&copy; 2026 BIPC BATTLEGROUND | Project 2026-2028</p>
+        </footer>
+    </div>
+
+    <script>
+        // 1. Auth Logic
+        const authForm = document.getElementById('auth-form');
+        const authScreen = document.getElementById('auth-screen');
+        const mainContent = document.getElementById('main-content');
+        const displayName = document.getElementById('display-name');
+
+        authForm.onsubmit = (e) => {
+            e.preventDefault();
+            const name = document.getElementById('user-name').value;
+            
+            // Effect: Hide login and show main site
+            authScreen.style.display = 'none';
+            mainContent.style.display = 'block';
+            displayName.innerText = "Hi, " + name;
+            
+            // Start countdown after login
+            startCountdown();
+        };
+
+        // 2. Quiz Logic
+        function checkAnswer(btn, isCorrect) {
+            const feedback = document.getElementById('quiz-feedback');
+            feedback.classList.remove('hidden');
+            if(isCorrect) {
+                btn.classList.add('bg-green-100', 'border-green-500');
+                feedback.innerText = "✅ Correct! Mitochondria generates ATP.";
+                feedback.className = "mt-6 text-center font-bold text-green-600";
+            } else {
+                btn.classList.add('bg-red-100', 'border-red-500');
+                feedback.innerText = "❌ Try Again! Think about cellular energy.";
+                feedback.className = "mt-6 text-center font-bold text-red-600";
+            }
+        }
+
+        // 3. Countdown Logic (Target NEET: May 3, 2026)
+        function startCountdown() {
+            const countDate = new Date("May 3, 2026 00:00:00").getTime();
+            
+            setInterval(() => {
+                const now = new Date().getTime();
+                const gap = countDate - now;
+
+                const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+
+                document.getElementById("days").innerText = Math.floor(gap / day);
+                document.getElementById("hours").innerText = Math.floor((gap % day) / hour);
+                document.getElementById("mins").innerText = Math.floor((gap % hour) / minute);
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
