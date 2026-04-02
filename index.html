@@ -3,333 +3,548 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC 2026-2028 | Professional Academic Engine</title>
-    <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" />
+    <title>BIPC 2026-28 | Professional Academic Engine</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap');
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f0f4f8; }
-        .hidden { display: none; }
-        .locked { filter: grayscale(1); opacity: 0.4; cursor: not-allowed; pointer-events: none; }
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
-        .neobrutalism { border: 3px solid #000; box-shadow: 5px 5px 0px #000; }
-        .correct-opt { background: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
-        .wrong-opt { background: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #f59e0b;
+            --bg-main: #f8fafc;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-main); 
+            color: #0f172a;
+        }
+
+        .mono { font-family: 'JetBrains Mono', monospace; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+        /* Neobrutalism & Glassmorphism Mix */
+        .glass { 
+            background: rgba(255, 255, 255, 0.8); 
+            backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.2); 
+        }
+
+        .card-neo {
+            background: white;
+            border: 2px solid #000;
+            box-shadow: 6px 6px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .card-neo:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px #000; }
+
+        .phase-locked { 
+            filter: grayscale(1); 
+            opacity: 0.6; 
+            cursor: not-allowed !important;
+            position: relative;
+        }
+
+        .phase-locked::after {
+            content: 'LOCKED UNTIL SESSION START';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: black;
+            color: white;
+            font-size: 8px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 800;
+        }
+
+        .chapter-card { transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .chapter-card:hover { transform: translateY(-5px); }
+
+        /* Book Style Layout */
+        .book-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 60px;
+            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .book-container::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 1px;
+            background: #eee;
+        }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-in { animation: fadeIn 0.5s ease-out forwards; }
+
+        .hidden { display: none !important; }
+        
+        /* Test Options */
+        .opt-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .opt-btn:hover:not(:disabled) { border-color: var(--primary); background: #eff6ff; }
+        .opt-correct { background-color: #dcfce7 !important; border-color: #22c55e !important; color: #166534; }
+        .opt-wrong { background-color: #fee2e2 !important; border-color: #ef4444 !important; color: #991b1b; }
     </style>
 </head>
-<body class="text-slate-900">
+<body>
 
-    <div id="auth-screen" class="fixed inset-0 z-[1000] bg-slate-950 flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-[3rem] p-10 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-blue-600 to-indigo-600"></div>
+    <div id="auth-screen" class="fixed inset-0 z-[2000] bg-slate-950 flex items-center justify-center p-6">
+        <div class="w-full max-w-xl bg-white rounded-[3rem] p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600"></div>
+            
             <div class="text-center mb-10">
-                <h1 class="text-4xl font-extrabold tracking-tighter">BIPC <span class="text-blue-600">MISSION</span></h1>
-                <p class="text-slate-400 font-bold text-sm uppercase tracking-widest mt-2">Class of 2026-2028</p>
+                <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center text-3xl mx-auto mb-6 shadow-lg">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h1 class="text-4xl font-extrabold tracking-tighter">BIPC <span class="text-blue-600">ELITE</span></h1>
+                <p class="text-slate-400 font-semibold text-sm uppercase tracking-widest mt-2">Professional 2-Year Engine</p>
             </div>
-            <form onsubmit="event.preventDefault(); login();" class="space-y-5">
-                <input type="text" id="stu-name" placeholder="Full Name" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
-                <input type="email" placeholder="Email Address" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
-                <input type="password" placeholder="Create Access Key" required class="w-full p-5 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all">
-                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
-                    <div class="flex items-start gap-3">
-                        <input type="checkbox" required class="mt-1 w-5 h-5 accent-blue-600">
-                        <label class="text-xs text-slate-500 font-medium">I accept the 2-Year Battle Plan. I understand that I must teach myself and pass tests to proceed.</label>
+
+            <form onsubmit="handleLogin(event)" class="space-y-6">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-2">
+                        <label class="text-xs font-black uppercase text-slate-400 ml-2">Aspirant Name</label>
+                        <input type="text" id="stu-name" placeholder="Reyansh" required class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all font-bold">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-black uppercase text-slate-400 ml-2">Target Year</label>
+                        <select class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all font-bold">
+                            <option>NEET 2026</option>
+                            <option>NEET 2027</option>
+                        </select>
                     </div>
                 </div>
-                <button class="w-full py-5 bg-slate-900 text-white font-black rounded-2xl hover:bg-blue-600 transition-all shadow-xl shadow-blue-200">INITIALIZE SESSION</button>
+
+                <div class="space-y-2">
+                    <label class="text-xs font-black uppercase text-slate-400 ml-2">Secure Access Key</label>
+                    <input type="password" placeholder="••••••••" required class="w-full p-5 bg-slate-50 border-2 border-slate-100 rounded-2xl outline-none focus:border-blue-500 transition-all font-bold">
+                </div>
+
+                <div class="p-6 bg-blue-50 rounded-[2rem] border border-blue-100">
+                    <div class="flex items-start gap-4">
+                        <input type="checkbox" required class="mt-1 w-5 h-5 accent-blue-600">
+                        <p class="text-[11px] text-blue-800 leading-relaxed font-medium">
+                            I hereby commit to the BIPC Mission (2026-2028). I agree to teach myself using this portal, complete the mandatory 15-question proficiency tests, and log my daily nutrition and rest.
+                        </p>
+                    </div>
+                </div>
+
+                <button class="w-full py-6 bg-slate-900 text-white font-black rounded-[2rem] text-lg hover:bg-blue-600 transition-all shadow-xl hover:shadow-blue-200 active:scale-[0.98]">
+                    INITIALIZE SYSTEM <i class="fas fa-chevron-right ml-2"></i>
+                </button>
             </form>
         </div>
     </div>
 
-    <div id="app" class="hidden">
-        <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200">
-            <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-                <div class="flex items-center gap-2">
-                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black">B</div>
-                    <span class="font-black text-xl tracking-tighter uppercase">BIPC <span class="text-blue-600">Pro</span></span>
+    <div id="app" class="hidden min-h-screen pb-20">
+        
+        <nav class="fixed top-0 w-full z-50 glass border-b border-slate-200 h-20 flex items-center px-8">
+            <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white font-black shadow-lg shadow-blue-200">R</div>
+                    <span class="font-black text-xl tracking-tighter uppercase hidden md:block">BIPC <span class="text-blue-600">Mission</span></span>
                 </div>
-                <div class="flex items-center gap-6">
-                    <div class="text-right hidden md:block">
-                        <p id="nav-user" class="text-sm font-black">Student Name</p>
-                        <p class="text-[10px] text-green-600 font-bold uppercase tracking-widest">Phase 1: Active</p>
+
+                <div class="flex items-center gap-8">
+                    <button onclick="showSection('dashboard')" class="nav-link font-bold text-sm text-blue-600">Home</button>
+                    <button onclick="showSection('career-track')" class="nav-link font-bold text-sm text-slate-500 hover:text-blue-600 transition">Career Track</button>
+                    <div class="h-8 w-[1px] bg-slate-200"></div>
+                    <div class="text-right">
+                        <p id="nav-user-name" class="text-xs font-black uppercase text-slate-800">DR. REYANSH</p>
+                        <p class="text-[9px] font-black text-green-600 uppercase tracking-widest">Phase 1: Foundation</p>
                     </div>
-                    <button onclick="logout()" class="text-slate-400 hover:text-red-500 transition-colors"><i class="fas fa-sign-out-alt text-xl"></i></button>
+                    <button onclick="location.reload()" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-600"><i class="fas fa-power-off"></i></button>
                 </div>
             </div>
         </nav>
 
-        <main class="max-w-7xl mx-auto px-6 pt-32 pb-20">
-            
-            <div id="dashboard">
-                <div class="grid lg:grid-cols-3 gap-8 mb-12">
-                    <div class="lg:col-span-2 bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 relative overflow-hidden">
-                        <div class="relative z-10">
-                            <h2 class="text-3xl font-black mb-2">Phase 1: 2026 Foundation</h2>
-                            <p class="text-slate-500 font-medium mb-8 italic">"The foundation for MBBS begins here."</p>
-                            
-                            <div class="grid md:grid-cols-3 gap-6">
-                                <button onclick="selectSub('Physics')" class="p-8 bg-blue-50 border-2 border-blue-100 rounded-[2.5rem] text-center hover:bg-blue-600 hover:text-white transition-all group">
-                                    <i class="fas fa-bolt text-3xl mb-4 text-blue-600 group-hover:text-white"></i>
-                                    <h4 class="font-black uppercase tracking-widest text-xs">Physics</h4>
-                                </button>
-                                <button onclick="selectSub('Chemistry')" class="p-8 bg-purple-50 border-2 border-purple-100 rounded-[2.5rem] text-center hover:bg-purple-600 hover:text-white transition-all group">
-                                    <i class="fas fa-flask text-3xl mb-4 text-purple-600 group-hover:text-white"></i>
-                                    <h4 class="font-black uppercase tracking-widest text-xs">Chemistry</h4>
-                                </button>
-                                <button onclick="selectSub('Biology')" class="p-8 bg-green-50 border-2 border-green-100 rounded-[2.5rem] text-center hover:bg-green-600 hover:text-white transition-all group">
-                                    <i class="fas fa-dna text-3xl mb-4 text-green-600 group-hover:text-white"></i>
-                                    <h4 class="font-black uppercase tracking-widest text-xs">Biology</h4>
-                                </button>
-                            </div>
+        <main class="max-w-7xl mx-auto px-6 pt-32">
+
+            <section id="dashboard-section" class="animate-in">
+                <div class="mb-16">
+                    <div class="flex justify-between items-end mb-8">
+                        <div>
+                            <h2 class="text-3xl font-black italic">The Academic Timeline</h2>
+                            <p class="text-slate-400 font-bold text-sm">Strategically Lock/Unlock based on your current year.</p>
+                        </div>
+                        <div class="bg-white border-2 border-black p-4 card-neo flex gap-6">
+                            <div class="text-center"><span id="c-days" class="text-2xl font-black block">000</span><span class="text-[8px] font-black opacity-40 uppercase">Days to NEET</span></div>
                         </div>
                     </div>
 
-                    <div class="bg-slate-900 rounded-[3.5rem] p-10 text-white flex flex-col justify-center text-center shadow-2xl">
-                        <h4 class="text-blue-400 font-black text-xs uppercase tracking-[0.3em] mb-6">NEET 2026 Countdown</h4>
-                        <div class="grid grid-cols-3 gap-4 mb-8">
-                            <div><span id="d_days" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Days</p></div>
-                            <div><span id="d_hrs" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Hours</p></div>
-                            <div><span id="d_mins" class="text-4xl font-black">00</span><p class="text-[9px] opacity-40 uppercase">Mins</p></div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div onclick="unlockSubjects()" class="bg-white p-10 rounded-[3rem] border-2 border-blue-600 shadow-xl cursor-pointer hover:scale-105 transition group relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:scale-125 transition-transform"><i class="fas fa-seedling text-8xl"></i></div>
+                            <span class="px-4 py-1 bg-blue-600 text-white rounded-full text-[10px] font-black uppercase tracking-widest">Active Phase</span>
+                            <h3 class="text-2xl font-extrabold mt-6 mb-2">Phase 1: 2026</h3>
+                            <p class="text-slate-500 text-sm font-medium">Foundation concepts of Class 11. Building the fundamental logic for MBBS.</p>
+                            <div class="mt-8 flex items-center gap-2 text-blue-600 font-black text-xs">
+                                EXPLORE SYLLABUS <i class="fas fa-arrow-right"></i>
+                            </div>
                         </div>
-                        <p class="text-[10px] italic opacity-60">"Don't stop when you're tired, stop when you're finished."</p>
-                    </div>
-                </div>
 
-                <div id="syllabus-view" class="hidden">
-                    <h3 id="subject-title" class="text-2xl font-black mb-8 flex items-center gap-3"></h3>
-                    <div class="space-y-4">
-                        <div id="chapter-1" class="bg-white p-8 rounded-3xl border-2 border-blue-600 flex justify-between items-center group transition-all hover:bg-slate-50">
-                            <div class="flex gap-6 items-center">
-                                <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center font-black">01</div>
-                                <div>
-                                    <h4 class="text-xl font-bold text-slate-800">Introduction & Basic Concepts</h4>
-                                    <p class="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Status: Open Session</p>
-                                </div>
-                            </div>
-                            <button onclick="startClass(1)" class="bg-slate-900 text-white px-8 py-3 rounded-2xl font-black hover:bg-blue-600 transition-all">START TEACHING</button>
+                        <div class="phase-locked bg-white p-10 rounded-[3rem] border border-slate-200">
+                            <h3 class="text-2xl font-extrabold mb-2 text-slate-400">Phase 2: 2027</h3>
+                            <p class="text-slate-300 text-sm font-medium">Class 12 Boards + Advanced NEET speed training. Rapid solving mode.</p>
                         </div>
-                        <div id="chapter-2" class="locked bg-white p-8 rounded-3xl border border-slate-100 flex justify-between items-center">
-                            <div class="flex gap-6 items-center">
-                                <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center font-black">02</div>
-                                <div>
-                                    <h4 class="text-xl font-bold text-slate-400">Advanced Dynamics & Laws</h4>
-                                    <p class="text-xs text-slate-300 font-bold uppercase tracking-widest mt-1">Status: Locked</p>
-                                </div>
-                            </div>
-                            <i class="fas fa-lock text-slate-200 text-2xl"></i>
+
+                        <div class="phase-locked bg-white p-10 rounded-[3rem] border border-slate-200">
+                            <h3 class="text-2xl font-extrabold mb-2 text-slate-400">Phase 3: 2028</h3>
+                            <p class="text-slate-300 text-sm font-medium">Final Crash Revision, 20-Year PYQs & Mock Battleground Finale.</p>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div id="classroom" class="hidden max-w-4xl mx-auto bg-white rounded-[4rem] p-12 md:p-20 shadow-2xl border-t-[12px] border-blue-600 relative">
-                <button onclick="exitClass()" class="absolute top-10 right-10 text-slate-300 hover:text-red-500"><i class="fas fa-times-circle text-3xl"></i></button>
+                <div id="subject-area" class="hidden animate-in">
+                    <h3 class="text-2xl font-black mb-8 flex items-center gap-3"><i class="fas fa-book-medical text-blue-600"></i> Core Disciplines</h3>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <button onclick="loadSyllabus('Physics')" class="bg-white p-8 rounded-[2.5rem] card-neo flex flex-col items-center text-center group">
+                            <div class="w-16 h-16 bg-orange-100 text-orange-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-orange-600 group-hover:text-white transition"><i class="fas fa-bolt"></i></div>
+                            <h4 class="font-black text-lg">PHYSICS</h4>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">15 Chapters Loaded</p>
+                        </button>
+                        <button onclick="loadSyllabus('Chemistry')" class="bg-white p-8 rounded-[2.5rem] card-neo flex flex-col items-center text-center group">
+                            <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-purple-600 group-hover:text-white transition"><i class="fas fa-flask"></i></div>
+                            <h4 class="font-black text-lg">CHEMISTRY</h4>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">15 Chapters Loaded</p>
+                        </button>
+                        <button onclick="loadSyllabus('Biology')" class="bg-white p-8 rounded-[2.5rem] card-neo flex flex-col items-center text-center group">
+                            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-2xl mb-4 group-hover:bg-green-600 group-hover:text-white transition"><i class="fas fa-dna"></i></div>
+                            <h4 class="font-black text-lg">BIOLOGY</h4>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-2">15 Chapters Loaded</p>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="syllabus-section" class="hidden animate-in pb-20">
+                <button onclick="showSection('dashboard')" class="mb-8 font-black text-sm text-blue-600 flex items-center gap-2"><i class="fas fa-chevron-left"></i> BACK TO PHASES</button>
+                <div class="flex justify-between items-center mb-10">
+                    <h2 id="current-sub-label" class="text-4xl font-black">Physics Syllabus</h2>
+                    <div class="px-6 py-2 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest">Progress: 0/15 Chapters</div>
+                </div>
+
+                <div id="chapter-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    </div>
+            </section>
+
+            <section id="classroom-section" class="hidden animate-in">
+                <div class="book-container card-neo">
+                    <div class="flex justify-between items-center mb-12">
+                        <span id="reading-chapter-num" class="text-[10px] font-black text-blue-600 uppercase tracking-widest">CHAPTER 01</span>
+                        <button onclick="showSection('syllabus')" class="text-slate-400 hover:text-red-500"><i class="fas fa-times-circle text-2xl"></i></button>
+                    </div>
+
+                    <div id="book-content" class="prose prose-slate max-w-none">
+                        </div>
+
+                    <div class="mt-20 pt-10 border-t border-slate-100">
+                        <h3 class="text-2xl font-black mb-4 italic">Teacher Reyansh's Note:</h3>
+                        <p class="text-slate-500 text-sm font-medium leading-relaxed mb-8">
+                            Before we proceed to the Proficiency Test, you must brief the concept. Explain how this chapter applies to a doctor's daily life or real-world mechanics.
+                        </p>
+                        <textarea id="brief-input" placeholder="Brief your learning here... (Minimum 50 characters required to unlock test)" class="w-full p-8 bg-slate-50 border-2 border-slate-100 rounded-[2rem] h-40 focus:border-blue-500 outline-none transition-all font-medium"></textarea>
+                        
+                        <div class="mt-10 flex gap-4">
+                            <button onclick="startProficiencyTest()" class="flex-1 py-6 bg-blue-600 text-white font-black rounded-[2rem] shadow-xl hover:bg-blue-700 transition-all active:scale-[0.98]">
+                                START PROFICIENCY TEST (15 Qs)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="test-section" class="hidden animate-in max-w-3xl mx-auto">
+                <div class="bg-white rounded-[3rem] p-12 shadow-2xl border-2 border-black card-neo">
+                    <div class="flex justify-between items-center mb-12">
+                        <div>
+                            <h2 id="test-title" class="text-2xl font-black">Chapter 01 Proficiency</h2>
+                            <p class="text-xs text-slate-400 font-bold uppercase mt-1">Passing Mark: 60%</p>
+                        </div>
+                        <div class="w-20 h-20 bg-red-50 border-2 border-red-100 rounded-full flex flex-col items-center justify-center">
+                            <span id="test-timer" class="text-xl font-black text-red-600">45:00</span>
+                        </div>
+                    </div>
+
+                    <div id="quiz-engine">
+                        </div>
+
+                    <div id="test-footer" class="mt-12 pt-10 border-t flex justify-between items-center">
+                        <p class="text-sm font-bold text-slate-400">Question <span id="q-idx">1</span> of 15</p>
+                        <button id="next-q-btn" onclick="nextQuestion()" class="px-10 py-4 bg-slate-900 text-white font-black rounded-2xl hover:bg-blue-600 transition-all">NEXT QUESTION</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="career-section" class="hidden animate-in">
+                <h2 class="text-3xl font-black mb-12 italic">Career Readiness Dashboard</h2>
+                <div class="grid md:grid-cols-4 gap-6 mb-12">
+                    <div class="bg-white p-8 rounded-[2.5rem] border border-slate-200 text-center">
+                        <i class="fas fa-user-md text-3xl text-blue-600 mb-4"></i>
+                        <h4 class="font-black text-sm uppercase">MBBS Readiness</h4>
+                        <div class="mt-4 h-2 w-full bg-slate-100 rounded-full"><div class="h-full bg-blue-600 w-[15%] rounded-full"></div></div>
+                        <p class="text-[10px] font-bold text-slate-400 mt-2">15% TRACKED</p>
+                    </div>
+                    </div>
                 
-                <div id="lecture-content" class="prose lg:prose-xl">
-                    <span class="bg-red-100 text-red-600 px-4 py-1 rounded-full text-xs font-black mb-6 inline-block">SESSION 01: THE FOUNDATION</span>
-                    <h1 class="text-5xl font-black leading-tight mb-8">Units, Dimensions & Real-life Physics</h1>
-                    <p class="text-lg text-slate-600 leading-relaxed mb-10">Physics is the study of how the universe behaves. In your NEET preparation, <strong>Accuracy</strong> is your best friend. Every measurement requires a unit—imagine a doctor prescribing "5 medicine." 5 grams? 5 ml? 5 tablets? Units save lives!</p>
-                    
-                    <div class="grid md:grid-cols-2 gap-8 mb-12">
-                        <div class="bg-blue-50 p-8 rounded-[2.5rem] border-l-8 border-blue-600">
-                            <h4 class="font-black text-blue-900 mb-4 uppercase text-sm tracking-widest">Core Lesson</h4>
-                            <p class="text-sm text-blue-800 font-medium">Dimensional analysis helps us verify if an equation is correct. For example, Force = Mass × Acceleration. $[M] \times [LT^{-2}] = [MLT^{-2}]$.</p>
+                <div class="bg-slate-950 text-white rounded-[3rem] p-12 relative overflow-hidden">
+                    <h3 class="text-2xl font-black mb-6 text-blue-400">Daily Health & Mind Log</h3>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div class="space-y-4">
+                            <label class="block text-xs font-black uppercase opacity-40">What did you eat today?</label>
+                            <input type="text" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500" placeholder="e.g. Protein-rich diet, fruits...">
+                            
+                            <label class="block text-xs font-black uppercase opacity-40">Hours of Deep Sleep?</label>
+                            <input type="number" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500" placeholder="7">
                         </div>
-                        <div class="bg-orange-50 p-8 rounded-[2.5rem] border-l-8 border-orange-600">
-                            <h4 class="font-black text-orange-900 mb-4 uppercase text-sm tracking-widest">Real Life Application</h4>
-                            <p class="text-sm text-orange-800 font-medium">Satellites use precise dimensional calculations to stay in orbit. A small error in a unit conversion once crashed a $125 million Mars orbiter!</p>
+                        <div class="space-y-4">
+                            <label class="block text-xs font-black uppercase opacity-40">Today's Mental State?</label>
+                            <textarea class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl h-32 outline-none focus:border-blue-500" placeholder="Feeling focused/tired..."></textarea>
                         </div>
                     </div>
+                    <button onclick="saveDailyMockLog()" class="mt-8 w-full py-5 bg-blue-600 rounded-2xl font-black shadow-xl hover:bg-blue-400 transition-all">SUBMIT DAILY PERFORMANCE LOG</button>
                 </div>
-
-                <div class="mt-20 border-t pt-10">
-                    <h3 class="text-2xl font-black mb-4">Brief Your Session</h3>
-                    <p class="text-sm text-slate-400 mb-4 italic">Teacher Reyansh: "Now, explain in your own words what you learned today. Be detailed."</p>
-                    <textarea id="brief-log" placeholder="Write your summary here... (Min 30 characters)" class="w-full p-8 bg-slate-50 border-2 border-slate-100 rounded-[2.5rem] h-40 focus:border-blue-500 outline-none transition-all"></textarea>
-                    
-                    <button onclick="unlockTest()" class="w-full py-6 bg-blue-600 text-white font-black rounded-3xl mt-8 shadow-2xl shadow-blue-200 hover:scale-[1.02] active:scale-[0.98] transition-all">TAKE THE PROFICIENCY TEST</button>
-                </div>
-            </div>
-
-            <div id="test-zone" class="hidden max-w-3xl mx-auto bg-white rounded-[4rem] p-12 md:p-16 shadow-2xl border-4 border-slate-900 neobrutalism">
-                <div class="flex justify-between items-center mb-12">
-                    <h2 class="text-3xl font-black">Chapter 01 Test</h2>
-                    <div class="text-xl font-mono font-black text-red-600 bg-red-50 px-6 py-2 rounded-full">45:00</div>
-                </div>
-
-                <div id="quiz-container" class="space-y-12">
-                    <div class="q-block">
-                        <p class="text-xl font-bold mb-8">1. Which of the following quantities has the same dimensions as that of Energy?</p>
-                        <div class="grid gap-4">
-                            <button onclick="checkAns(this, false, 'Power is Energy/Time, so dimensions differ.')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">A. Power</button>
-                            <button onclick="checkAns(this, true, 'Both Work and Energy have the dimensional formula [ML²T⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">B. Work</button>
-                            <button onclick="checkAns(this, false, 'Force is [MLT⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">C. Force</button>
-                            <button onclick="checkAns(this, false, 'Pressure is [ML⁻¹T⁻²].')" class="opt p-6 border-2 border-slate-100 rounded-3xl text-left font-bold hover:border-slate-900 transition-all">D. Pressure</button>
-                        </div>
-                        <div class="exp hidden mt-6 p-6 bg-blue-50 border-l-8 border-blue-600 rounded-r-3xl text-blue-900 italic font-medium"></div>
-                    </div>
-                </div>
-
-                <div id="test-results" class="hidden mt-16 pt-10 border-t text-center">
-                    <h3 id="score-text" class="text-5xl font-black mb-4">Score: 0%</h3>
-                    <p id="feedback-text" class="text-slate-500 font-bold mb-8">You need 50% to pass.</p>
-                    <button id="next-btn" class="hidden bg-slate-900 text-white px-12 py-5 rounded-3xl font-black hover:bg-green-600 transition-all">UNLOCK CHAPTER 02</button>
-                    <button id="retry-btn" class="hidden bg-red-600 text-white px-12 py-5 rounded-3xl font-black">RE-WATCH CLASS (REVISION)</button>
-                </div>
-            </div>
-
-            <div id="debrief-zone" class="hidden max-w-2xl mx-auto bg-slate-950 text-white p-12 rounded-[4rem] shadow-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-blue-600 blur-[80px] opacity-20"></div>
-                <h2 class="text-3xl font-black mb-8 text-blue-400">Final Deep-Briefing</h2>
-                <div class="space-y-8 relative z-10">
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Nutrition Check: What did you eat?</label>
-                        <input type="text" id="diet" placeholder="e.g. Oats, Fruit, Milk..." class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Rest & Recover: Sleep hours?</label>
-                        <input type="text" id="rest" placeholder="e.g. 7 Hours" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl outline-none focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black uppercase tracking-widest opacity-40 mb-3">Daily Analysis: What was tough today?</label>
-                        <textarea id="struggle" class="w-full bg-white/5 border border-white/10 p-5 rounded-2xl h-32 outline-none focus:border-blue-500"></textarea>
-                    </div>
-                    <button onclick="finishDay()" class="w-full py-5 bg-blue-600 text-white font-black rounded-3xl shadow-xl hover:bg-blue-400 transition-all">SAVE PERFORMANCE LOG & LOGOUT</button>
-                </div>
-            </div>
+            </section>
 
         </main>
 
-        <footer class="py-20 text-center border-t border-slate-100">
-            <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Strategic Academic Engineering</p>
-            <h5 class="text-lg font-black text-slate-800 mt-2">Developed for Excellence by <span class="text-blue-600 underline">Reyansh</span></h5>
-            <div class="mt-8 flex justify-center gap-6 text-slate-300">
-                <i class="fab fa-instagram hover:text-blue-600 cursor-pointer"></i>
-                <i class="fab fa-whatsapp hover:text-blue-600 cursor-pointer"></i>
-                <i class="fab fa-youtube hover:text-blue-600 cursor-pointer"></i>
+        <div id="ai-hub" class="fixed bottom-10 right-10 z-[100]">
+            <button onclick="toggleAI()" class="w-16 h-16 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl hover:scale-110 transition active:scale-95"><i class="fas fa-robot"></i></button>
+            <div id="ai-panel" class="hidden absolute bottom-20 right-0 w-80 bg-white border-2 border-black rounded-[2rem] p-6 shadow-2xl card-neo">
+                <h4 class="font-black text-sm mb-4 flex items-center gap-2"><i class="fas fa-brain text-blue-600"></i> NEET SOLVER AI</h4>
+                <div id="ai-history" class="h-40 overflow-y-auto mb-4 p-3 bg-slate-50 rounded-xl text-[10px] space-y-2">
+                    <p class="italic text-slate-400 text-center">Hello Reyansh! Ask me any doubt about BIPC concepts.</p>
+                </div>
+                <div class="flex gap-2">
+                    <input type="text" id="ai-input" placeholder="Ask doubt..." class="flex-1 p-3 bg-slate-100 border rounded-xl text-xs outline-none">
+                    <button onclick="askAI()" class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center"><i class="fas fa-paper-plane"></i></button>
+                </div>
             </div>
+        </div>
+
+        <footer class="py-20 text-center">
+            <p class="text-xs font-black text-slate-300 uppercase tracking-[0.5em] mb-4">Strategic Academic Protocol</p>
+            <h5 class="text-lg font-black text-slate-800">Masterminded by <span class="text-blue-600 underline">Reyansh</span></h5>
+            <p class="text-[10px] text-slate-400 mt-2 italic">Building the next generation of Medical Professionals.</p>
         </footer>
     </div>
 
-    <div id="ai-widget" class="fixed bottom-10 right-10 z-[100] hidden">
-        <button onclick="toggleAI()" class="w-16 h-16 bg-slate-900 text-white rounded-full shadow-2xl flex items-center justify-center text-2xl animate-bounce"><i class="fas fa-brain"></i></button>
-        <div id="ai-box" class="hidden absolute bottom-20 right-0 w-80 bg-white border-2 border-slate-900 rounded-3xl p-6 shadow-2xl neobrutalism">
-            <h4 class="font-black text-sm mb-4">NEET Solver AI</h4>
-            <input type="text" id="ai-q" placeholder="Ask a question..." class="w-full p-3 bg-slate-50 border rounded-xl text-xs mb-4">
-            <button onclick="askAI()" class="w-full py-2 bg-slate-900 text-white font-bold rounded-xl text-xs">SOLVE</button>
-            <p id="ai-res" class="mt-4 text-[10px] text-slate-500 italic"></p>
-        </div>
-    </div>
-
     <script>
-        let testScore = 0;
-        let selectedSubject = "";
+        // DATA ARRAYS (15 Chapters Each)
+        const syllabus = {
+            Physics: [
+                "Units & Measurements", "Motion in a Straight Line", "Motion in a Plane", "Laws of Motion", 
+                "Work, Energy & Power", "System of Particles", "Gravitation", "Properties of Solids",
+                "Properties of Fluids", "Thermal Properties", "Thermodynamics", "Kinetic Theory",
+                "Oscillations", "Waves", "Mathematical Tools"
+            ],
+            Chemistry: [
+                "Basic Concepts of Chem", "Structure of Atom", "Classification of Elements", "Chemical Bonding",
+                "Thermodynamics", "Equilibrium", "Redox Reactions", "Organic: Basic Principles",
+                "Hydrocarbons", "States of Matter", "S-Block Elements", "P-Block Elements",
+                "Environmental Chem", "Analytical Chem", "Hydrogen"
+            ],
+            Biology: [
+                "The Living World", "Biological Classification", "Plant Kingdom", "Animal Kingdom",
+                "Morphology of Plants", "Anatomy of Plants", "Structural Org in Animals", "Cell: Unit of Life",
+                "Biomolecules", "Cell Cycle", "Transport in Plants", "Mineral Nutrition",
+                "Photosynthesis", "Respiration in Plants", "Plant Growth"
+            ]
+        };
 
-        function login() {
+        const testQuestions = [
+            { q: "Which of the following is not a fundamental unit?", a: "Watt", opts: ["Meter", "Kilogram", "Watt", "Second"], exp: "Watt is a derived unit of Power." },
+            { q: "The dimensions of Torque are same as?", a: "Work", opts: ["Work", "Power", "Force", "Pressure"], exp: "Torque = F x d [ML2T-2], Work = F x d [ML2T-2]." }
+        ];
+
+        let activeSection = 'dashboard';
+        let currentSubject = '';
+        let currentChapterIdx = 0;
+        let currentQIdx = 0;
+        let quizScore = 0;
+
+        function handleLogin(e) {
+            e.preventDefault();
             const name = document.getElementById('stu-name').value;
             document.getElementById('auth-screen').classList.add('hidden');
             document.getElementById('app').classList.remove('hidden');
-            document.getElementById('ai-widget').classList.remove('hidden');
-            document.getElementById('nav-user').innerText = "Future Dr. " + name;
-            startCountdown();
+            document.getElementById('nav-user-name').innerText = "DR. " + name;
+            startTimer();
         }
 
-        function logout() { location.reload(); }
-
-        function selectSub(sub) {
-            selectedSubject = sub;
-            document.getElementById('syllabus-view').classList.remove('hidden');
-            document.getElementById('subject-title').innerText = sub + " Master Curriculum";
-            window.scrollTo(0, document.getElementById('syllabus-view').offsetTop - 100);
+        function showSection(id) {
+            document.querySelectorAll('main > section').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id + '-section').classList.remove('hidden');
+            window.scrollTo(0,0);
         }
 
-        function startClass(ch) {
-            document.getElementById('dashboard').classList.add('hidden');
-            document.getElementById('classroom').classList.remove('hidden');
-            window.scrollTo(0, 0);
+        function unlockSubjects() {
+            document.getElementById('subject-area').classList.remove('hidden');
+            window.scrollTo({ top: document.getElementById('subject-area').offsetTop - 100, behavior: 'smooth' });
         }
 
-        function exitClass() {
-            document.getElementById('dashboard').classList.remove('hidden');
-            document.getElementById('classroom').classList.add('hidden');
+        function loadSyllabus(sub) {
+            currentSubject = sub;
+            showSection('syllabus');
+            document.getElementById('current-sub-label').innerText = sub + " Mastery List";
+            const grid = document.getElementById('chapter-grid');
+            grid.innerHTML = '';
+            
+            syllabus[sub].forEach((chap, i) => {
+                const isLocked = i > 0; // Simple logic: only chapter 1 unlocked for now
+                grid.innerHTML += `
+                    <div class="chapter-card bg-white p-8 rounded-[2.5rem] card-neo flex flex-col justify-between ${isLocked ? 'locked opacity-50' : ''}">
+                        <div>
+                            <span class="text-[10px] font-black text-blue-600 uppercase">Chapter ${String(i+1).padStart(2, '0')}</span>
+                            <h4 class="text-xl font-extrabold mt-2">${chap}</h4>
+                        </div>
+                        <button onclick="openClassroom(${i})" class="mt-8 py-3 bg-slate-900 text-white rounded-2xl font-black text-xs hover:bg-blue-600 transition">
+                            ${isLocked ? '<i class="fas fa-lock mr-2"></i> LOCKED' : 'ENTER CLASSROOM'}
+                        </button>
+                    </div>
+                `;
+            });
         }
 
-        function unlockTest() {
-            const brief = document.getElementById('brief-log').value;
-            if(brief.trim().length < 30) {
-                alert("REYANSH: You cannot proceed without briefing. Teach back what you learned!");
+        function openClassroom(idx) {
+            currentChapterIdx = idx;
+            showSection('classroom');
+            document.getElementById('reading-chapter-num').innerText = `CHAPTER ${String(idx+1).padStart(2, '0')}`;
+            document.getElementById('book-content').innerHTML = `
+                <h1 class="text-4xl font-black mb-8">${syllabus[currentSubject][idx]}</h1>
+                <p class="text-lg leading-relaxed mb-6 font-medium">Welcome to your professional study session. In this chapter, we explore the real-life applications of <strong>${syllabus[currentSubject][idx]}</strong>.</p>
+                <div class="bg-blue-50 p-8 rounded-[2.5rem] border-l-8 border-blue-600 my-10">
+                    <h4 class="font-black text-blue-900 mb-4 uppercase text-sm tracking-widest">Teacher Reyansh's Core Perspective</h4>
+                    <p class="text-sm text-blue-800 leading-relaxed italic">"Don't just memorize the formula. Understand why the universe uses this rule. In a hospital, a dimension error in dosage or heart rate monitoring can be fatal."</p>
+                </div>
+                <h3 class="text-2xl font-black mb-4">Core Concepts:</h3>
+                <ul class="space-y-4 font-medium text-slate-600">
+                    <li>Fundamental Principles and their origins.</li>
+                    <li>Mathematical derivation for professional accuracy.</li>
+                    <li>Clinical and Engineering case studies.</li>
+                </ul>
+            `;
+        }
+
+        function startProficiencyTest() {
+            const brief = document.getElementById('brief-input').value;
+            if(brief.length < 50) {
+                alert("REYANSH: Briefing too short! Explain your learning deeper to prove you are ready.");
                 return;
             }
-            document.getElementById('classroom').classList.add('hidden');
-            document.getElementById('test-zone').classList.remove('hidden');
-            window.scrollTo(0, 0);
+            showSection('test');
+            currentQIdx = 0;
+            quizScore = 0;
+            loadQuestion();
         }
 
-        function checkAns(btn, isCorrect, explanation) {
-            const btns = btn.parentElement.querySelectorAll('.opt');
-            const expBox = btn.parentElement.nextElementSibling;
-            btns.forEach(b => b.disabled = true);
+        function loadQuestion() {
+            const engine = document.getElementById('quiz-engine');
+            const qData = testQuestions[currentQIdx] || testQuestions[0]; // Fallback for demo
             
-            if(isCorrect) {
-                btn.classList.add('correct-opt');
-                testScore = 100;
+            document.getElementById('q-idx').innerText = currentQIdx + 1;
+            
+            engine.innerHTML = `
+                <p class="text-xl font-bold text-slate-800 mb-8">${qData.q}</p>
+                <div class="grid gap-4">
+                    ${qData.opts.map(o => `
+                        <button onclick="checkAnswer(this, '${o}', '${qData.a}', '${qData.exp}')" class="opt-btn">${o}</button>
+                    `).join('')}
+                </div>
+                <div id="q-feedback" class="hidden mt-8 p-6 bg-slate-50 rounded-2xl text-xs font-bold leading-relaxed italic"></div>
+            `;
+            document.getElementById('next-q-btn').classList.add('hidden');
+        }
+
+        function checkAnswer(btn, picked, correct, exp) {
+            const feedback = document.getElementById('q-feedback');
+            document.querySelectorAll('.opt-btn').forEach(b => b.disabled = true);
+            
+            if(picked === correct) {
+                btn.classList.add('opt-correct');
+                quizScore += (100/15);
             } else {
-                btn.classList.add('wrong-opt');
-                testScore = 0;
+                btn.classList.add('opt-wrong');
             }
             
-            expBox.innerHTML = `<strong>NEET Solver Breakdown:</strong> ${explanation}`;
-            expBox.classList.remove('hidden');
-            
-            showResults();
+            feedback.innerHTML = `<span class="text-blue-600">REYANSH EXPLANATION:</span> ${exp}`;
+            feedback.classList.remove('hidden');
+            document.getElementById('next-q-btn').classList.remove('hidden');
         }
 
-        function showResults() {
-            const res = document.getElementById('test-results');
-            const scoreT = document.getElementById('score-text');
-            const nxt = document.getElementById('next-btn');
-            const rty = document.getElementById('retry-btn');
-            
-            res.classList.remove('hidden');
-            scoreT.innerText = `Score: ${testScore}%`;
-            
-            if(testScore >= 50) {
-                document.getElementById('feedback-text').innerText = "MASTERED! You have passed the proficiency test.";
-                nxt.classList.remove('hidden');
-                nxt.onclick = () => {
-                    document.getElementById('test-zone').classList.add('hidden');
-                    document.getElementById('debrief-zone').classList.remove('hidden');
-                };
+        function nextQuestion() {
+            currentQIdx++;
+            if(currentQIdx < 3) { // Demo limit
+                loadQuestion();
             } else {
-                document.getElementById('feedback-text').innerText = "FAILED! Initiating mandatory revision session.";
-                rty.classList.remove('hidden');
-                rty.onclick = () => { location.reload(); };
+                finishTest();
             }
         }
 
-        function finishDay() {
-            alert("REYASNH AI: Performance log synchronized. Your 2026 Phase 1 stats are updated. Rest well, Doctor!");
-            location.reload();
+        function finishTest() {
+            const engine = document.getElementById('quiz-engine');
+            const pass = quizScore >= 60;
+            
+            engine.innerHTML = `
+                <div class="text-center py-10">
+                    <h3 class="text-5xl font-black ${pass ? 'text-green-600' : 'text-red-600'} mb-4">${Math.round(quizScore)}%</h3>
+                    <p class="text-slate-500 font-bold mb-8">${pass ? 'EXCELLENT! NEXT CHAPTER UNLOCKED.' : 'FAILED. YOU MUST REVISE AGAIN.'}</p>
+                    <button onclick="${pass ? "showSection('career')" : "showSection('syllabus')"}" class="px-12 py-5 bg-slate-900 text-white rounded-[2rem] font-black">
+                        ${pass ? 'VIEW CAREER PROGRESS' : 'BACK TO REVISION'}
+                    </button>
+                </div>
+            `;
+            document.getElementById('test-footer').classList.add('hidden');
         }
 
-        function startCountdown() {
+        function startTimer() {
             const target = new Date("May 3, 2026 00:00:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const diff = target - now;
-                document.getElementById('d_days').innerText = Math.floor(diff / (1000*60*60*24));
-                document.getElementById('d_hrs').innerText = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
-                document.getElementById('d_mins').innerText = Math.floor((diff % (1000*60*60)) / (1000*60));
+                document.getElementById('c-days').innerText = String(Math.floor(diff / (1000*60*60*24))).padStart(3, '0');
             }, 1000);
         }
 
-        function toggleAI() { document.getElementById('ai-box').classList.toggle('hidden'); }
+        function toggleAI() { document.getElementById('ai-panel').classList.toggle('hidden'); }
 
         function askAI() {
-            const q = document.getElementById('ai-q').value;
-            const res = document.getElementById('ai-res');
-            res.innerText = `NEET SOLVER: Analyzing your query about "${q}"... This is a high-priority concept for NEET 2026. Reyansh suggests referencing NCERT Page 12-15 for the specific diagram. Keep pushing!`;
+            const inp = document.getElementById('ai-input');
+            const hist = document.getElementById('ai-history');
+            if(!inp.value) return;
+            
+            hist.innerHTML += `<div class="text-right"><span class="bg-blue-600 text-white p-2 rounded-lg inline-block">Me: ${inp.value}</span></div>`;
+            setTimeout(() => {
+                hist.innerHTML += `<div><span class="bg-slate-200 text-slate-800 p-2 rounded-lg inline-block">Reyansh AI: In the BIPC curriculum, "${inp.value}" is usually found in Chapter 04. Focus on the NCERT diagrams.</span></div>`;
+                hist.scrollTop = hist.scrollHeight;
+            }, 500);
+            inp.value = '';
         }
     </script>
 </body>
