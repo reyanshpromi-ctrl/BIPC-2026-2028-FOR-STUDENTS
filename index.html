@@ -3,379 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BIPC OMEGA | AVALANCHE SUPREME 1000</title>
+    <title>BIPC OMEGA | TITAN 3000 EDITION</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=JetBrains+Mono:wght@500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* ---------------------------------------------------------
-           1. CORE ARCHITECTURAL STYLES (LINES 20-350)
-           --------------------------------------------------------- */
+        /* =========================================================
+           1. TITAN CORE DESIGN SYSTEM (LINES 20 - 500)
+           =========================================================
+        */
         :root {
             --g-blue: #4285F4;
             --g-red: #EA4335;
             --g-yellow: #FBBC05;
             --g-green: #34A853;
-            --bg-canvas: #f8f9fa;
+            --dark-canvas: #0f172a;
             --neo-border: 4px solid #000;
-            --neo-shadow: 10px 10px 0px #000;
+            --neo-shadow: 15px 15px 0px #000;
         }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg-canvas);
+            background: #ffffff;
             color: #1a1a1a;
-            scroll-behavior: smooth;
+            transition: all 0.5s ease;
         }
 
-        /* NEO-BRUTALISM UI KIT */
+        /* NEO-BRUTALISM UI FRAMEWORK */
         .neo-card {
             background: white;
             border: var(--neo-border);
             box-shadow: var(--neo-shadow);
-            border-radius: 2rem;
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 2.5rem;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .neo-card:hover {
-            transform: translate(-3px, -3px);
-            box-shadow: 15px 15px 0px #000;
+            transform: translate(-5px, -5px);
+            box-shadow: 22px 22px 0px #000;
         }
 
-        /* GSC PERFORMANCE DASHBOARD STYLES */
-        .gsc-stat-tab {
+        /* GOOGLE CONSOLE SPECIFIC STYLES */
+        .gsc-tab {
             border-bottom: 6px solid transparent;
             cursor: pointer;
-            transition: all 0.2s;
+            padding: 1.5rem;
+            transition: 0.2s;
         }
-        .gsc-stat-tab:hover { background: #f1f3f4; }
-        .gsc-stat-tab.active-blue { border-color: var(--g-blue); background: #e8f0fe; }
-        .gsc-stat-tab.active-green { border-color: var(--g-green); background: #e6f4ea; }
-        .gsc-stat-tab.active-purple { border-color: #a142f4; background: #f3e8fe; }
-
-        /* THE BOOK ENGINE */
-        .book-wrapper { perspective: 2000px; }
-        .page-layer {
-            display: none;
-            animation: slideIn 0.4s ease-out;
-            min-height: 700px;
-        }
-        .page-layer.active { display: block; }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .gsc-tab.active {
+            background: #f8fbff;
+            border-bottom-color: var(--g-blue);
         }
 
-        /* VIDEO & AI COMPONENTS */
-        .vid-frame {
-            background: #000;
+        /* NCERT BOOK ANIMATIONS */
+        .page-flip {
+            animation: pageReveal 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes pageReveal {
+            from { opacity: 0; transform: rotateY(-10deg) translateX(30px); }
+            to { opacity: 1; transform: rotateY(0deg) translateX(0); }
+        }
+
+        /* VIDEO PLAYER STYLING */
+        .yt-frame {
             border-radius: 3rem;
-            border: 6px solid #000;
+            border: 8px solid #000;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.4);
+            aspect-ratio: 16/9;
+            background: #000;
         }
 
-        .ai-terminal {
+        /* AI TERMINAL */
+        .terminal-bg {
             background: #0d1117;
+            color: #58a6ff;
             font-family: 'JetBrains Mono', monospace;
+            border-radius: 2rem;
             border: 2px solid #30363d;
-            border-radius: 1.5rem;
-            color: #c9d1d9;
-        }
-
-        /* NAVIGATION */
-        nav {
-            background: white;
-            border-bottom: 4px solid #000;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
         }
 
         /* CUSTOM SCROLLBAR */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #fff; }
-        ::-webkit-scrollbar-thumb { background: #000; border-radius: 5px; }
+        ::-webkit-scrollbar { width: 12px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 10px; border: 3px solid #f1f1f1; }
     </style>
 </head>
 <body>
 
-    <nav class="px-10 py-5">
-        <div class="max-w-[1750px] mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-6">
-                <div class="flex gap-1 group">
-                    <span class="w-4 h-4 rounded-full bg-red-500 group-hover:scale-110 transition"></span>
-                    <span class="w-4 h-4 rounded-full bg-yellow-400 group-hover:scale-110 transition"></span>
-                    <span class="w-4 h-4 rounded-full bg-green-500 group-hover:scale-110 transition"></span>
-                </div>
-                <h1 class="text-2xl font-black italic tracking-tighter">BIPC <span class="text-blue-600">OMEGA</span> <span class="not-italic text-slate-300 ml-2 font-bold text-lg">AVALANCHE v9.0</span></h1>
+    <section id="view-home" class="min-h-screen flex flex-col overflow-hidden">
+        <nav class="p-10 flex justify-between items-center bg-white z-50">
+            <div class="flex items-center gap-4">
+                <div class="w-10 h-10 bg-blue-600 rounded-full animate-bounce"></div>
+                <h1 class="text-3xl font-black italic tracking-tighter">BIPC <span class="text-blue-600">OMEGA</span></h1>
+            </div>
+            <div class="flex items-center gap-12 font-black text-xs uppercase tracking-[0.2em]">
+                <a href="#" class="hover:text-blue-600">Clinical AI</a>
+                <a href="#" class="hover:text-blue-600">Syllabus 2028</a>
+                <button onclick="navTo('auth')" class="bg-black text-white px-10 py-4 rounded-full hover:bg-blue-600 transition shadow-xl">Candidate Sign In</button>
+            </div>
+        </nav>
+
+        <div class="flex-1 flex flex-col items-center justify-center text-center px-6 relative">
+            <div class="absolute top-0 left-0 w-full h-full opacity-5 pointer-events-none">
+                <svg width="100%" height="100%"><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" stroke-width="1"/></pattern><rect width="100%" height="100%" fill="url(#grid)" /></svg>
             </div>
             
-            <div class="flex items-center gap-10 font-black text-xs uppercase tracking-widest">
-                <button onclick="navTo('gsc')" class="text-blue-600 border-b-4 border-blue-600 pb-1">Performance</button>
-                <button onclick="navTo('ncert')" class="hover:text-blue-600 transition">NCERT Engine</button>
-                <button onclick="navTo('career')" class="hover:text-blue-600 transition">Career Sync</button>
-                <button onclick="navTo('ai')" class="bg-black text-white px-8 py-3 rounded-full hover:bg-blue-600 transition">Solver AI</button>
-                <div class="flex items-center gap-3 border-l-2 border-slate-100 pl-8">
-                    <div class="text-right">
-                        <p class="text-[10px] leading-none">DR. REYANSH</p>
-                        <p class="text-[8px] text-blue-600 mt-1">RANK #001</p>
-                    </div>
-                    <div class="w-10 h-10 bg-slate-200 rounded-full border-2 border-black overflow-hidden">
-                        <i class="fas fa-user-md flex items-center justify-center h-full text-lg"></i>
-                    </div>
-                </div>
+            <span class="px-6 py-2 border-2 border-black rounded-full font-black text-[10px] uppercase mb-8 tracking-widest bg-yellow-400">Supreme Academic Protocol Active</span>
+            <h2 class="text-8xl md:text-[10rem] font-black italic tracking-tighter leading-none mb-12">
+                DR. <span class="text-blue-600">REYANSH</span><br>SUPREME.
+            </h2>
+            <p class="max-w-3xl text-xl text-slate-500 font-bold mb-16 leading-relaxed">
+                The final frontier of BIPC preparation. Integrated Google Search Console metrics, clinical NCERT dissections, and AI-powered performance indexing.
+            </p>
+            <div class="flex gap-8">
+                <button onclick="navTo('auth')" class="px-16 py-8 bg-black text-white text-xl font-black rounded-full hover:scale-105 transition shadow-2xl">INITIATE GENESIS</button>
+                <button class="px-16 py-8 border-4 border-black text-xl font-black rounded-full hover:bg-black hover:text-white transition">VIRTUAL TOUR</button>
             </div>
         </div>
-    </nav>
+    </section>
 
-    <main class="max-w-[1750px] mx-auto px-10 pt-40 pb-32">
+    <section id="view-auth" class="hidden min-h-screen bg-slate-50 flex items-center justify-center p-6">
+        <div class="neo-card w-full max-w-xl p-16 bg-white relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 flex">
+                <div class="flex-1 bg-blue-600"></div><div class="flex-1 bg-red-600"></div><div class="flex-1 bg-yellow-500"></div><div class="flex-1 bg-green-600"></div>
+            </div>
+            <div class="text-center mb-16">
+                <h3 class="text-5xl font-black italic mb-4">Identity Verification</h3>
+                <p class="text-slate-400 font-bold uppercase tracking-widest text-xs">Medical Aspirant Gate v10.2</p>
+            </div>
+            <div class="space-y-8">
+                <div class="group">
+                    <label class="block text-[10px] font-black uppercase mb-3 text-slate-500">Aspirant ID</label>
+                    <input type="text" value="REYANSH_SUPREME_001" class="w-full p-6 bg-slate-50 border-4 border-black rounded-3xl font-black text-lg outline-none focus:border-blue-600 transition" readonly>
+                </div>
+                <div class="group">
+                    <label class="block text-[10px] font-black uppercase mb-3 text-slate-500">Security Access Key</label>
+                    <input type="password" placeholder="••••••••••••" class="w-full p-6 bg-slate-50 border-4 border-black rounded-3xl font-black text-lg outline-none focus:border-blue-600 transition">
+                </div>
+                <button onclick="navTo('dash')" class="w-full py-8 bg-black text-white rounded-3xl font-black text-xl hover:bg-blue-600 transition-all shadow-xl group">
+                    AUTHORIZE ACCESS <i class="fas fa-chevron-right ml-4 group-hover:translate-x-2 transition"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-        <section id="view-gsc" class="space-y-12">
-            <div class="neo-card p-12 bg-white">
-                <div class="flex justify-between items-center mb-10">
-                    <h2 class="text-4xl font-black italic tracking-tighter"><i class="fab fa-google text-blue-600 mr-4"></i>Performance Console</h2>
-                    <div class="flex gap-4">
-                        <div class="bg-slate-100 p-2 rounded-xl border-2 border-black flex gap-2">
-                            <button class="bg-white px-6 py-2 rounded-lg font-black text-[10px] border-2 border-black">OVERVIEW</button>
-                            <button class="px-6 py-2 rounded-lg font-black text-[10px] text-slate-400">PAGES</button>
+    <section id="view-dash" class="hidden min-h-screen flex">
+        <aside class="w-24 bg-black border-r-4 border-black flex flex-col items-center py-12 gap-12 sticky top-0 h-screen z-[100]">
+            <div class="text-white text-3xl font-black italic">Ω</div>
+            <div class="flex-1 flex flex-col gap-10 text-slate-600 text-2xl">
+                <button onclick="switchTab('gsc')" class="hover:text-blue-500 transition active-link" title="Performance"><i class="fas fa-chart-bar"></i></button>
+                <button onclick="switchTab('ncert')" class="hover:text-blue-500 transition" title="NCERT Library"><i class="fas fa-book-medical"></i></button>
+                <button onclick="switchTab('ai')" class="hover:text-blue-500 transition" title="Clinical AI"><i class="fas fa-microscope"></i></button>
+            </div>
+            <button onclick="navTo('home')" class="text-red-500 text-2xl hover:scale-110 transition"><i class="fas fa-power-off"></i></button>
+        </aside>
+
+        <div class="flex-1 overflow-y-auto">
+            <header class="p-10 border-b-4 border-black bg-white flex justify-between items-center sticky top-0 z-50">
+                <div>
+                    <h4 id="active-header-title" class="text-3xl font-black italic tracking-tighter">Performance Console</h4>
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Google Search Console Integration</p>
+                </div>
+                <div class="flex gap-6 items-center">
+                    <div class="text-right">
+                        <p class="text-[10px] font-black uppercase text-slate-400">Current Rank</p>
+                        <p class="text-xl font-black italic">#001 AIR</p>
+                    </div>
+                    <div class="w-14 h-14 bg-blue-100 border-4 border-black rounded-2xl flex items-center justify-center font-black text-blue-600">R</div>
+                </div>
+            </header>
+
+            <div class="p-12 max-w-[1700px] mx-auto pb-32">
+                
+                <div id="tab-gsc" class="tab-pane space-y-12 animate-reveal">
+                    <div class="neo-card p-12">
+                        <div class="grid grid-cols-4 gap-6 mb-12">
+                            <div class="gsc-tab active rounded-2xl border-2 border-slate-100">
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Total Impressions</p>
+                                <p class="text-5xl font-black text-blue-600">2.4M</p>
+                                <div class="h-1 w-full bg-blue-100 mt-4 rounded-full"><div class="h-full bg-blue-600 w-3/4"></div></div>
+                            </div>
+                            <div class="gsc-tab rounded-2xl border-2 border-slate-100">
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Average Recall (CTR)</p>
+                                <p class="text-5xl font-black text-green-600">96.8%</p>
+                                <div class="h-1 w-full bg-green-100 mt-4 rounded-full"><div class="h-full bg-green-600 w-full"></div></div>
+                            </div>
+                            <div class="gsc-tab rounded-2xl border-2 border-slate-100">
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Study Position</p>
+                                <p class="text-5xl font-black text-red-500">#0.4</p>
+                                <div class="h-1 w-full bg-red-100 mt-4 rounded-full"><div class="h-full bg-red-600 w-1/2"></div></div>
+                            </div>
+                            <div class="gsc-tab rounded-2xl border-2 border-slate-100">
+                                <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Indexing Speed</p>
+                                <p class="text-5xl font-black text-purple-600">0.2ms</p>
+                                <div class="h-1 w-full bg-purple-100 mt-4 rounded-full"><div class="h-full bg-purple-600 w-4/5"></div></div>
+                            </div>
+                        </div>
+
+                        <div class="h-[450px] bg-white border-4 border-black rounded-[3.5rem] p-10 relative overflow-hidden">
+                            <div class="absolute inset-0 opacity-10 flex items-center justify-center">
+                                <i class="fab fa-google text-[20rem]"></i>
+                            </div>
+                            <svg class="w-full h-full relative z-10" viewBox="0 0 1000 300">
+                                <path d="M0 250 Q 150 200 300 240 T 600 100 T 900 180 L 1000 50" stroke="#4285F4" stroke-width="12" fill="none" stroke-linecap="round" />
+                                <path d="M0 280 Q 200 250 400 260 T 700 200 T 1000 220" stroke="#34A853" stroke-width="6" fill="none" stroke-dasharray="20,10" opacity="0.3" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="neo-card p-10">
+                        <h5 class="text-2xl font-black italic mb-8">Top Memory Queries</h5>
+                        <table class="w-full text-left">
+                            <thead class="border-b-4 border-black">
+                                <tr class="text-[10px] font-black uppercase text-slate-400">
+                                    <th class="pb-6">Topic / URL</th>
+                                    <th class="pb-6">Impressions</th>
+                                    <th class="pb-6">Recall Rate</th>
+                                    <th class="pb-6">Position</th>
+                                </tr>
+                            </thead>
+                            <tbody class="font-bold">
+                                <tr class="border-b border-slate-100"><td class="py-6">/ncert/bio/cardiac-cycle</td><td>42,000</td><td class="text-green-500">99.2%</td><td>1.1</td></tr>
+                                <tr class="border-b border-slate-100"><td class="py-6">/ncert/phys/quantum-numbers</td><td>12,500</td><td class="text-blue-500">84.0%</td><td>2.4</td></tr>
+                                <tr class="border-b border-slate-100"><td class="py-6">/ncert/chem/p-block-elements</td><td>65,900</td><td class="text-green-500">98.5%</td><td>1.0</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div id="tab-ncert" class="tab-pane hidden space-y-16 animate-reveal">
+                    <div class="yt-frame">
+                        <iframe id="main-lecture-video" src="https://www.youtube.com/embed/S9Vz7t2-lpk?enablejsapi=1&rel=0&showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen class="w-full h-full"></iframe>
+                    </div>
+
+                    <div class="neo-card p-20 bg-white min-h-[1000px] relative">
+                        <div class="flex justify-between items-center mb-20 border-b-8 border-slate-50 pb-12">
+                            <div>
+                                <h3 id="book-title-display" class="text-6xl font-black italic tracking-tighter">Human Reproduction</h3>
+                                <p class="text-blue-600 font-black uppercase text-xs tracking-[0.5em] mt-3">Official NCERT Supreme Content Dissection</p>
+                            </div>
+                            <div class="flex items-center gap-8 bg-slate-50 p-6 rounded-3xl border-4 border-black">
+                                <button onclick="flipPage(-1)" class="w-16 h-16 bg-white border-2 border-black rounded-2xl flex items-center justify-center hover:bg-black hover:text-white transition shadow-lg"><i class="fas fa-chevron-left"></i></button>
+                                <span id="page-num" class="text-3xl font-black italic w-24 text-center">01 / 10</span>
+                                <button onclick="flipPage(1)" class="w-16 h-16 bg-white border-2 border-black rounded-2xl flex items-center justify-center hover:bg-black hover:text-white transition shadow-lg"><i class="fas fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+
+                        <div id="book-canvas" class="page-flip">
+                            </div>
+                    </div>
+
+                    <div id="ch-index" class="grid grid-cols-4 gap-8">
+                        </div>
+                </div>
+
+                <div id="tab-ai" class="tab-pane hidden max-w-4xl mx-auto animate-reveal">
+                    <div class="text-center mb-16">
+                        <h3 class="text-7xl font-black italic tracking-tighter">OMEGA SOLVER <span class="text-blue-600">AI</span></h3>
+                        <p class="text-slate-400 font-bold uppercase tracking-[0.4em] italic mt-4 text-xs">Neural Clinical Doubt Resolver</p>
+                    </div>
+                    <div class="terminal-bg h-[700px] flex flex-col p-12">
+                        <div id="ai-logs" class="flex-1 overflow-y-auto space-y-8 pr-6">
+                            <div class="flex gap-6">
+                                <span class="text-blue-400 font-bold uppercase text-[10px]">Root@Omega:~$</span>
+                                <p class="text-sm leading-relaxed">System initialized. Memory banks synchronized with 11th/12th NCERT Biology, Physics, and Chemistry. Ready for clinical query.</p>
+                            </div>
+                        </div>
+                        <div class="mt-12 relative">
+                            <input type="text" placeholder="Dissect the Mechanism of Action of Penicillin..." class="w-full bg-[#161b22] border-2 border-[#30363d] p-8 rounded-3xl text-white font-bold text-lg outline-none focus:border-blue-500 transition">
+                            <button class="absolute right-6 top-6 bg-blue-600 text-white w-14 h-14 rounded-2xl shadow-2xl hover:scale-110 transition"><i class="fas fa-terminal"></i></button>
                         </div>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-4 gap-4 mb-10">
-                    <div class="gsc-stat-tab active-blue p-8 rounded-2xl border-2 border-slate-100">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2"><i class="fas fa-mouse-pointer mr-2"></i>Total Clicks</p>
-                        <p class="text-5xl font-black text-blue-600">42.8K</p>
-                        <div class="h-1 w-full bg-blue-100 mt-4 rounded-full"><div class="h-full bg-blue-600 w-3/4 rounded-full"></div></div>
-                    </div>
-                    <div class="gsc-stat-tab active-purple p-8 rounded-2xl border-2 border-slate-100">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2"><i class="fas fa-eye mr-2"></i>Total Impressions</p>
-                        <p class="text-5xl font-black text-purple-600">1.2M</p>
-                        <div class="h-1 w-full bg-purple-100 mt-4 rounded-full"><div class="h-full bg-purple-600 w-1/2 rounded-full"></div></div>
-                    </div>
-                    <div class="gsc-stat-tab active-green p-8 rounded-2xl border-2 border-slate-100">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2"><i class="fas fa-percentage mr-2"></i>Recall CTR</p>
-                        <p class="text-5xl font-black text-green-600">89.4%</p>
-                        <div class="h-1 w-full bg-green-100 mt-4 rounded-full"><div class="h-full bg-green-600 w-4/5 rounded-full"></div></div>
-                    </div>
-                    <div class="gsc-stat-tab p-8 rounded-2xl border-2 border-slate-100">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2"><i class="fas fa-trophy mr-2"></i>Avg. Position</p>
-                        <p class="text-5xl font-black text-orange-500">#1.2</p>
-                        <div class="h-1 w-full bg-orange-100 mt-4 rounded-full"><div class="h-full bg-orange-600 w-full rounded-full"></div></div>
-                    </div>
-                </div>
-
-                <div class="h-[450px] bg-white border-4 border-black rounded-[3rem] p-12 flex items-center justify-center relative">
-                    <svg class="w-full h-full" viewBox="0 0 1000 300">
-                        <line x1="0" y1="250" x2="1000" y2="250" stroke="#eee" stroke-width="2" />
-                        <line x1="0" y1="150" x2="1000" y2="150" stroke="#eee" stroke-width="2" />
-                        <line x1="0" y1="50" x2="1000" y2="50" stroke="#eee" stroke-width="2" />
-                        <path d="M0 200 L 100 180 L 200 220 L 300 120 L 400 140 L 500 60 L 600 80 L 700 30 L 800 50 L 1000 20" stroke="#4285F4" stroke-width="6" fill="none" stroke-linecap="round" />
-                        <path d="M0 250 L 100 230 L 250 240 L 400 180 L 600 200 L 800 140 L 1000 160" stroke="#a142f4" stroke-width="4" fill="none" stroke-dasharray="10,5" opacity="0.4" />
-                    </svg>
-                    <div class="absolute bottom-10 left-10 text-[9px] font-black uppercase text-slate-300 tracking-widest italic">Live Brain-Indexing Performance Data</div>
-                </div>
             </div>
-
-            <div class="neo-card p-12">
-                <h3 class="text-2xl font-black italic mb-10">Top NCERT Impressions (Queries)</h3>
-                <div class="overflow-hidden rounded-2xl border-2 border-slate-100">
-                    <table class="w-full text-left">
-                        <thead class="bg-slate-50 border-b-2 border-black">
-                            <tr class="text-[10px] font-black uppercase tracking-widest text-slate-500">
-                                <th class="p-6">Query Topic</th>
-                                <th>Clicks</th>
-                                <th>Impressions</th>
-                                <th>CTR</th>
-                            </tr>
-                        </thead>
-                        <tbody class="font-bold text-sm">
-                            <tr class="border-b border-slate-50 hover:bg-blue-50 transition"><td class="p-6">Bernoulli’s Principle Application</td><td>1,420</td><td>15,000</td><td class="text-blue-600">9.4%</td></tr>
-                            <tr class="border-b border-slate-50 hover:bg-blue-50 transition"><td class="p-6">Structure of Mitochondria</td><td>8,900</td><td>24,000</td><td class="text-blue-600">37.0%</td></tr>
-                            <tr class="border-b border-slate-50 hover:bg-blue-50 transition"><td class="p-6">Redox Reaction Balancing</td><td>4,200</td><td>12,000</td><td class="text-blue-600">35.0%</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
-
-        <section id="view-ncert" class="hidden space-y-16">
-            <div class="vid-frame aspect-video w-full relative">
-                <div class="absolute inset-0 bg-slate-900 flex flex-col items-center justify-center text-center">
-                    <div class="w-44 h-44 bg-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition cursor-pointer pulse group">
-                        <i class="fas fa-play text-blue-600 text-6xl ml-3 group-hover:text-black"></i>
-                    </div>
-                    <h3 id="vid-title" class="text-5xl font-black text-white italic mt-12 tracking-tighter">Select Chapter to Launch Lecture</h3>
-                    <p class="text-slate-500 font-bold mt-4 uppercase tracking-[0.4em] text-xs italic">Omni-Pipeline v4.0 Audio Sync</p>
-                </div>
-            </div>
-
-            <div class="max-w-6xl mx-auto">
-                <div class="neo-card p-24 bg-white">
-                    <div class="flex justify-between items-center mb-20 border-b-8 border-slate-50 pb-12">
-                        <div>
-                            <h2 id="book-title" class="text-7xl font-black italic tracking-tighter leading-none">Units & Measurements</h2>
-                            <p class="text-[10px] font-black text-blue-600 uppercase tracking-[0.6em] mt-4">OFFICIAL NCERT SUPREME SYNC</p>
-                        </div>
-                        <div class="flex items-center gap-8 bg-slate-100 p-5 rounded-[3rem] border-4 border-black">
-                            <button onclick="turnPage(-1)" class="w-16 h-16 bg-white border-2 border-black rounded-2xl flex items-center justify-center hover:bg-black hover:text-white transition"><i class="fas fa-arrow-left"></i></button>
-                            <span id="page-num" class="text-2xl font-black italic px-4">01 / 10</span>
-                            <button onclick="turnPage(1)" class="w-16 h-16 bg-white border-2 border-black rounded-2xl flex items-center justify-center hover:bg-black hover:text-white transition"><i class="fas fa-arrow-right"></i></button>
-                        </div>
-                    </div>
-
-                    <div id="book-content" class="book-wrapper min-h-[600px]">
-                        </div>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10" id="ch-grid">
-                </div>
-        </section>
-
-        <section id="view-ai" class="hidden space-y-12">
-            <div class="max-w-4xl mx-auto">
-                <div class="flex items-center gap-10 mb-16">
-                    <div class="w-24 h-24 bg-blue-600 rounded-[2.5rem] flex items-center justify-center text-white text-4xl shadow-2xl"><i class="fas fa-brain"></i></div>
-                    <div>
-                        <h2 class="text-6xl font-black italic tracking-tighter">OMEGA SOLVER AI</h2>
-                        <p class="text-slate-400 font-bold uppercase text-xs tracking-widest mt-2 italic">Neural Clinical Query Engine</p>
-                    </div>
-                </div>
-
-                <div class="ai-terminal h-[650px] flex flex-col p-10">
-                    <div class="flex-1 overflow-y-auto space-y-8" id="chat-stream">
-                        <div class="flex gap-6">
-                            <span class="text-blue-500 font-bold text-xs uppercase">System@Avalanche:</span>
-                            <p class="text-sm leading-relaxed">Diagnostic environment ready. Please provide the NCERT concept or Diagram reference for clinical dissection. <br><span class="text-slate-500">[STATUS: 60 CHAPTERS SYNCED]</span></p>
-                        </div>
-                    </div>
-                    <div class="mt-10 relative">
-                        <input type="text" placeholder="Explain the Mechanism of Vision..." class="w-full bg-[#161b22] border-2 border-[#30363d] p-8 rounded-3xl text-white font-bold outline-none focus:border-blue-600 transition">
-                        <button class="absolute right-6 top-6 bg-blue-600 text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-xl hover:scale-110 transition"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </main>
+        </div>
+    </section>
 
     <script>
-        const NCERT_DB = [
-            { id: 1, title: 'Units & Measurements', sub: 'Physics', class: 11, icon: 'fa-ruler' },
-            { id: 2, title: 'Biological Classification', sub: 'Biology', class: 11, icon: 'fa-dna' },
-            { id: 3, title: 'Atomic Structure', sub: 'Chemistry', class: 11, icon: 'fa-atom' },
-            { id: 4, title: 'Motion in a Plane', sub: 'Physics', class: 11, icon: 'fa-vector-square' },
-            { id: 5, title: 'Genetics: Principles', sub: 'Biology', class: 12, icon: 'fa-microscope' },
-            { id: 6, title: 'Ray Optics', sub: 'Physics', class: 12, icon: 'fa-eye' }
+        const NCERT_DATABASE = [
+            { id: 1, title: 'Cell: Unit of Life', sub: 'Biology', vid: 'BV3f6_7_v4A', pages: 20 },
+            { id: 2, title: 'Motion in 1D', sub: 'Physics', vid: 'f56S11Q_R0U', pages: 15 },
+            { id: 3, title: 'Atomic Structure', sub: 'Chemistry', vid: 'MT6K-qY9U9M', pages: 18 },
+            { id: 4, title: 'Human Reproduction', sub: 'Biology', vid: 'S9Vz7t2-lpk', pages: 22 },
+            { id: 5, title: 'Ray Optics', sub: 'Physics', vid: 'XW_GfE-WpC0', pages: 30 },
+            { id: 6, title: 'Biomolecules', sub: 'Biology', vid: 'O-2Yk85F1kE', pages: 14 }
         ];
 
-        let appState = {
-            view: 'gsc',
-            activeCh: NCERT_DB[0],
-            page: 1
+        let titanState = {
+            view: 'home',
+            tab: 'gsc',
+            activeCh: NCERT_DATABASE[3], // Default Human Reproduction
+            pageNum: 1
         };
 
-        function navTo(id) {
+        function navTo(viewId) {
             document.querySelectorAll('section').forEach(s => s.classList.add('hidden'));
-            document.getElementById('view-' + id).classList.remove('hidden');
-            appState.view = id;
+            document.getElementById('view-' + viewId).classList.remove('hidden');
+            titanState.view = viewId;
             window.scrollTo(0,0);
         }
 
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-pane').forEach(t => t.classList.add('hidden'));
+            document.getElementById('tab-' + tabId).classList.remove('hidden');
+            document.getElementById('active-header-title').innerText = tabId.toUpperCase() + " CONSOLE";
+            titanState.tab = tabId;
+        }
+
+        function flipPage(dir) {
+            if(dir === 1 && titanState.pageNum < 10) titanState.pageNum++;
+            if(dir === -1 && titanState.pageNum > 1) titanState.pageNum--;
+            document.getElementById('page-num').innerText = `${String(titanState.pageNum).padStart(2, '0')} / 10`;
+            renderBookContent();
+        }
+
+        function loadChapter(id) {
+            titanState.activeCh = NCERT_DATABASE.find(c => c.id === id);
+            titanState.pageNum = 1;
+            document.getElementById('book-title-display').innerText = titanState.activeCh.title;
+            document.getElementById('main-lecture-video').src = `https://www.youtube.com/embed/${titanState.activeCh.vid}?enablejsapi=1&rel=0`;
+            renderBookContent();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function renderIndex() {
-            const grid = document.getElementById('ch-grid');
-            grid.innerHTML = NCERT_DB.map(ch => `
-                <div onclick="openChapter(${ch.id})" class="neo-card p-10 cursor-pointer group hover:bg-black hover:text-white transition duration-500">
+            const grid = document.getElementById('ch-index');
+            grid.innerHTML = NCERT_DATABASE.map(ch => `
+                <div onclick="loadChapter(${ch.id})" class="neo-card p-10 cursor-pointer group hover:bg-black hover:text-white transition-all duration-500">
                     <div class="flex justify-between items-start mb-10">
-                        <span class="text-[9px] font-black uppercase px-4 py-1 border-2 border-black rounded-full bg-slate-50 text-black">Class ${ch.class}</span>
-                        <i class="fas ${ch.icon} text-3xl text-slate-100 group-hover:text-blue-500 transition"></i>
+                        <span class="text-[9px] font-black uppercase px-4 py-1 border-2 border-black rounded-full bg-slate-50 text-black">${ch.sub}</span>
+                        <i class="fas fa-play-circle text-slate-200 group-hover:text-blue-500 text-3xl transition"></i>
                     </div>
-                    <h4 class="text-2xl font-black italic leading-tight mb-4">${ch.title}</h4>
-                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">${ch.sub} Module</p>
+                    <h4 class="text-2xl font-black italic leading-tight">${ch.title}</h4>
+                    <p class="text-[10px] font-bold text-slate-400 mt-4 uppercase">Clinical Core v4.0</p>
                 </div>
             `).join('');
         }
 
-        function openChapter(id) {
-            appState.activeCh = NCERT_DB.find(c => c.id === id);
-            appState.page = 1;
-            document.getElementById('vid-title').innerText = "Streaming: " + appState.activeCh.title;
-            document.getElementById('book-title').innerText = appState.activeCh.title;
-            renderPage();
-            navTo('ncert');
-        }
+        function renderBookContent() {
+            const canvas = document.getElementById('book-canvas');
+            canvas.classList.remove('page-flip');
+            void canvas.offsetWidth; // Trigger reflow
+            canvas.classList.add('page-flip');
 
-        function turnPage(dir) {
-            if(dir === 1 && appState.page < 10) appState.page++;
-            if(dir === -1 && appState.page > 1) appState.page--;
-            document.getElementById('page-num').innerText = `${String(appState.page).padStart(2, '0')} / 10`;
-            renderPage();
-        }
-
-        function renderPage() {
-            const container = document.getElementById('book-content');
-            let content = '';
-
-            if(appState.page === 1) {
-                content = `
-                    <div class="page-layer active">
-                        <h3 class="text-5xl font-black text-blue-600 mb-10 italic">1.0 Clinical Context</h3>
-                        <p class="text-2xl font-medium leading-[1.8] text-slate-700 mb-12">The chapter <strong>${appState.activeCh.title}</strong> is a high-yield topic for the NEET 2028 Medical entrance. NCERT emphasizes the dimensional analysis here. Focus specifically on the exceptions mentioned in the footnote of Page 12.</p>
-                        <div class="grid lg:grid-cols-2 gap-16">
-                            <div class="p-12 bg-slate-50 border-4 border-black rounded-[3rem] relative">
-                                <span class="absolute -top-6 left-12 bg-black text-white px-6 py-2 text-xs font-black italic">TOPPER INSIGHT</span>
-                                <p class="text-xl italic font-bold text-slate-600 leading-relaxed">"Never ignore the units of constants. G, R, and k are the areas where most students lose negative marks."</p>
+            if(titanState.pageNum === 1) {
+                canvas.innerHTML = `
+                    <div class="space-y-12">
+                        <h4 class="text-4xl font-black text-blue-600 italic mb-8 underline decoration-8 decoration-blue-100">1.0 Clinical Context</h4>
+                        <p class="text-3xl leading-relaxed text-slate-700 font-medium">
+                            The section on <strong>${titanState.activeCh.title}</strong> represents the highest yield topic for NEET/AIIMS 2028. 
+                            The NCERT text focuses on the morphological transitions and clinical exceptions. 
+                        </p>
+                        <div class="grid grid-cols-2 gap-12">
+                            <div class="p-12 bg-slate-50 border-4 border-black rounded-[4rem] relative">
+                                <span class="absolute -top-6 left-12 bg-black text-white px-6 py-2 text-[10px] font-black">TOPPER TRICK</span>
+                                <p class="text-2xl italic font-bold text-slate-600 leading-relaxed">
+                                    "Always link Figure ${titanState.pageNum}.4 with the biochemical pathway described on Page ${titanState.pageNum + 45}. Questions are usually framed on the correlation."
+                                </p>
                             </div>
-                            <div class="flex flex-col items-center justify-center p-10 border-4 border-dashed border-slate-200 rounded-[3rem]">
-                                <svg width="220" height="220" viewBox="0 0 100 100">
-                                    <circle cx="50" cy="50" r="40" stroke="#000" stroke-width="2" fill="none" />
-                                    <path d="M50 10 L50 90 M10 50 L90 50" stroke="#4285F4" stroke-width="1" stroke-dasharray="2" />
-                                    <circle cx="50" cy="50" r="12" fill="#EA4335" />
-                                    <text x="10" y="95" font-family="monospace" font-size="5" font-weight="bold">Fig 1.1: Atomic Symmetry</text>
+                            <div class="flex flex-col items-center justify-center border-4 border-dashed border-slate-200 rounded-[4rem] p-10">
+                                <svg width="200" height="200" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="45" stroke="black" stroke-width="2" fill="none" />
+                                    <path d="M50 5 L50 95 M5 50 L95 50" stroke="#eee" />
+                                    <circle cx="50" cy="50" r="15" fill="var(--g-blue)" class="animate-pulse" />
+                                    <text x="10" y="95" font-size="5" font-weight="bold">Fig 1.1: Core Morphological Unit</text>
                                 </svg>
                             </div>
                         </div>
                     </div>
                 `;
-            } else if(appState.page === 6) {
-                content = `
-                    <div class="page-layer active">
-                        <h3 class="text-5xl font-black text-red-600 mb-12 italic">6.0 Formula Repository</h3>
-                        <div class="space-y-8">
-                            <div class="p-10 bg-black text-white rounded-[2.5rem] flex justify-between items-center group hover:bg-blue-600 transition">
-                                <span class="font-black italic text-2xl uppercase tracking-tighter">Universal Gravity</span>
-                                <code class="text-4xl font-black text-green-400 italic">F = G(m1m2/r²)</code>
+            } else if (titanState.pageNum === 5) {
+                canvas.innerHTML = `
+                    <div class="space-y-12">
+                        <h4 class="text-4xl font-black text-red-600 italic mb-8">5.0 Formula & Logic Bank</h4>
+                        <div class="grid gap-8">
+                            <div class="p-10 bg-black text-white rounded-[2.5rem] flex justify-between items-center group hover:bg-green-600 transition">
+                                <span class="text-2xl font-black italic">Thermodynamic Constant</span>
+                                <code class="text-4xl font-bold text-green-400">ΔG = ΔH - TΔS</code>
                             </div>
                             <div class="p-10 bg-black text-white rounded-[2.5rem] flex justify-between items-center group hover:bg-blue-600 transition">
-                                <span class="font-black italic text-2xl uppercase tracking-tighter">Energy Potential</span>
-                                <code class="text-4xl font-black text-green-400 italic">U = mgh</code>
+                                <span class="text-2xl font-black italic">Refractive Index Logic</span>
+                                <code class="text-4xl font-bold text-blue-400">n = c / v</code>
                             </div>
-                            <div class="p-10 bg-black text-white rounded-[2.5rem] flex justify-between items-center group hover:bg-blue-600 transition">
-                                <span class="font-black italic text-2xl uppercase tracking-tighter">Clinical Molarity</span>
-                                <code class="text-4xl font-black text-green-400 italic">M = n / V_sol</code>
-                            </div>
+                        </div>
+                        <div class="h-60 border-4 border-black rounded-[3rem] bg-slate-50 flex items-center justify-center font-black text-slate-300 uppercase tracking-widest text-4xl italic">
+                            SVG CHART LOADED: RECALL DENSITY
                         </div>
                     </div>
                 `;
             } else {
-                content = `
-                    <div class="page-layer active">
-                        <h3 class="text-4xl font-black text-slate-900 mb-10 italic">${appState.page}.0 Advanced Dissection</h3>
-                        <div class="w-full h-96 bg-slate-50 border-4 border-black rounded-[3rem] mb-12 flex items-center justify-center font-black text-slate-300 uppercase tracking-widest text-4xl">SVG DIAGRAM ${appState.page}.A LOADED</div>
-                        <p class="text-2xl font-bold text-slate-500 leading-relaxed italic">Detailed analysis of subsection ${appState.page}.4 of the NCERT textbook, covering the correlation between ${appState.activeCh.sub} and Biological systems.</p>
+                canvas.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-[600px] text-slate-200">
+                        <i class="fas fa-dna text-[10rem] mb-12"></i>
+                        <h5 class="text-3xl font-black uppercase tracking-widest italic">Clinical Page ${titanState.pageNum}.0 Synchronizing...</h5>
+                        <p class="font-bold text-slate-400 mt-4 italic">Direct Cloud Access to NCERT Text v4.2</p>
                     </div>
                 `;
             }
-            container.innerHTML = content;
         }
 
+        // Boot
         renderIndex();
+        loadChapter(4);
     </script>
 </body>
 </html>
